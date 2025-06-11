@@ -330,8 +330,9 @@
                         <option value="Camry">Toyota Camry</option>
                         <option value="Fortuner">Toyota Fortuner</option>
                         <option value="Innova">Toyota Innova</option>
-                        <option value="Revo_BCab">Toyota Revo (ภาคิน)</option>
-                        <option value="Revo_DCab">Toyota Revo (ดับเบิ้ลแค็บ)</option>
+                        <option value="Revo_BCab">Toyota Revo Standard (B-Cab)</option>
+                        <option value="Revo_CCab">Toyota Revo Smartcab (C-Cab)</option>
+                        <option value="Revo_DCab">Toyota Revo Doublecab (D-Cab)</option>
                         <option value="Hilux_Champ">Toyota Hilux Champ</option>
                     </select>
                 </div>
@@ -445,7 +446,7 @@
     </div>
 
     <script>
-        // ข้อมูลระบบ Toyota Leasing ตามไฟล์ที่ให้มา
+        // ข้อมูลระบบ Toyota Leasing
         const ToyotaLeasingSystem = {
             info: {
                 title: "โปรแกรมสนับสนุนการขายประจำเดือนมิถุนายน 2568",
@@ -523,6 +524,13 @@
                     "15%": { "48": 3.65, "60": 3.95, "72": 4.45, "84": 5.19, "96": 5.69 },
                     "20%": { "48": 2.85, "60": 3.49, "72": 3.95, "84": 4.65, "96": 5.15 },
                     "25%": { "48": 2.39, "60": 3.39, "72": 3.69, "84": 4.49, "96": 4.99 }
+                },
+                "Revo_CCab": {
+                    "5%": { "48": 4.90, "60": 5.25, "72": 5.45, "84": 5.55 },
+                    "10%": { "48": 4.10, "60": 4.35, "72": 4.90, "84": 5.40 },
+                    "15%": { "48": 3.55, "60": 3.85, "72": 4.30, "84": 5.00, "96": 5.50 },
+                    "20%": { "48": 2.80, "60": 3.40, "72": 3.80, "84": 4.50, "96": 5.00 },
+                    "25%": { "48": 2.39, "60": 3.30, "72": 3.60, "84": 4.30, "96": 4.80 }
                 },
                 "Revo_DCab": {
                     "5%": { "48": 4.80, "60": 5.15, "72": 5.45, "84": 5.55 },
@@ -625,6 +633,31 @@
             }
         };
 
+        // ฟังก์ชันหาเปอร์เซ็นต์ดาวน์ขั้นต่ำที่เป็นไปได้และมีอัตราดอกเบี้ย
+        function findMinimumDownPaymentPercent(actualPercent, model, term, promotion = null) {
+            const availablePercents = [5, 10, 15, 20, 25];
+            
+            // หาเปอร์เซ็นต์ที่มากกว่าหรือเท่ากับเปอร์เซ็นต์ที่มี และมีอัตราดอกเบี้ย
+            for (let percent of availablePercents) {
+                if (percent >= actualPercent) {
+                    const rate = getInterestRate(model, percent, term, promotion);
+                    if (rate !== null) {
+                        return percent;
+                    }
+                }
+            }
+            
+            // ถ้าไม่พบ ให้หาเปอร์เซ็นต์ใดๆ ที่มีอัตราดอกเบี้ย
+            for (let percent of availablePercents) {
+                const rate = getInterestRate(model, percent, term, promotion);
+                if (rate !== null) {
+                    return percent;
+                }
+            }
+            
+            return null; // ไม่พบอัตราดอกเบี้ยเลย
+        }
+
         // ฟังก์ชันอัพเดทแสดงเปอร์เซ็นต์เงินดาวน์
         function updateDownPaymentPercentage() {
             const price = parseFloat(document.getElementById('carPrice').value);
@@ -636,7 +669,7 @@
             if (price && downPayment && price > 0 && model && term) {
                 const actualPercent = (downPayment / price * 100).toFixed(1);
                 
-                // หา promotions ที่เลือกไว้ (สำหรับการแสดงผล real-time)
+                // หา promotions ที่เลือกไว้
                 const selectedPromotions = [];
                 document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
                     if (!checkbox.value.includes('_Grade') && !checkbox.value.includes('_More') && 
@@ -747,31 +780,6 @@
             return Math.max(baseRate - totalDiscount, 0);
         }
 
-        // ฟังก์ชันหาเปอร์เซ็นต์ดาวน์ขั้นต่ำที่เป็นไปได้และมีอัตราดอกเบี้ย
-        function findMinimumDownPaymentPercent(actualPercent, model, term, promotion = null) {
-            const availablePercents = [5, 10, 15, 20, 25];
-            
-            // หาเปอร์เซ็นต์ที่มากกว่าหรือเท่ากับเปอร์เซ็นต์ที่มี และมีอัตราดอกเบี้ย
-            for (let percent of availablePercents) {
-                if (percent >= actualPercent) {
-                    const rate = getInterestRate(model, percent, term, promotion);
-                    if (rate !== null) {
-                        return percent;
-                    }
-                }
-            }
-            
-            // ถ้าไม่พบ ให้หาเปอร์เซ็นต์ใดๆ ที่มีอัตราดอกเบี้ย
-            for (let percent of availablePercents) {
-                const rate = getInterestRate(model, percent, term, promotion);
-                if (rate !== null) {
-                    return percent;
-                }
-            }
-            
-            return null; // ไม่พบอัตราดอกเบี้ยเลย
-        }
-
         // ฟังก์ชันหาเงื่อนไขที่เหมาะสมตามค่างวดที่ต้องการ
         function findBestConditions(model, price, targetPayment) {
             const suggestions = [];
@@ -838,16 +846,6 @@
 
             // หาเงื่อนไขที่เหมาะสมหากระบุค่างวดที่ต้องการ
             if (targetPayment && (!downPaymentAmount || !term)) {
-                // รวบรวมโปรโมชั่นที่เลือกไว้ก่อน
-                const selectedPromotions = [];
-                document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-                    if (!checkbox.value.includes('_Grade') && !checkbox.value.includes('_More') && 
-                        !checkbox.value.includes('_Easy') && checkbox.value !== 'Household' && 
-                        checkbox.value !== 'Special_Profession') {
-                        selectedPromotions.push(checkbox.value);
-                    }
-                });
-                
                 const suggestions = findBestConditions(model, price, targetPayment);
                 
                 if (suggestions.length > 0) {
