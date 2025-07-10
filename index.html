@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toyota Leasing Calculator - คำนวณโปรแกรมเช่าซื้อรถโตโยต้า</title>
+    <title>Toyota Leasing Calculator - คำนวณโปรแกรมเช่าซื้อและสบายดี กรกฎาคม 2568</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -43,6 +43,53 @@
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .tab-button {
+            flex: 1;
+            max-width: 300px;
+            padding: 15px 25px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #d32f2f, #f44336);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         .main-content {
@@ -119,6 +166,11 @@
             transform: scale(1.2);
         }
 
+        .checkbox-item.new-feature {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-left: 4px solid #ff9800;
+        }
+
         .calculate-btn {
             width: 100%;
             padding: 15px;
@@ -190,34 +242,6 @@
             border-left-color: #f44336;
         }
 
-        .promotions-section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            margin-top: 30px;
-        }
-
-        .promo-card {
-            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border-left: 5px solid #4caf50;
-        }
-
-        .promo-title {
-            font-weight: 700;
-            color: #2e7d32;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .promo-details {
-            color: #555;
-            line-height: 1.5;
-        }
-
         .error-message {
             background: #ffebee;
             color: #c62828;
@@ -236,6 +260,133 @@
             margin-top: 20px;
         }
 
+        .new-badge {
+            background: #ff9800;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .discount-section {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+
+        .discount-title {
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Sabaidee specific styles */
+        .sabaidee-options {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #9c27b0;
+        }
+
+        .sabaidee-title {
+            font-weight: 700;
+            color: #7b1fa2;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .rv-display {
+            background: #e8eaf6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #3f51b5;
+        }
+
+        .rv-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #3f51b5;
+        }
+
+        .tab-indicator {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+            font-weight: 600;
+            color: #1976d2;
+        }
+
+        .percentage-display {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-group input {
+            flex: 1;
+        }
+
+        .unit-label {
+            background: #f0f0f0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #666;
+            border: 2px solid #e0e0e0;
+        }
+
+        .promotions-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 5px solid #4caf50;
+        }
+
+        .promo-card.new {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-left-color: #ff9800;
+        }
+
+        .promo-title {
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .promo-card.new .promo-title {
+            color: #e65100;
+        }
+
+        .promo-details {
+            color: #555;
+            line-height: 1.5;
+        }
+
         @media (max-width: 768px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -248,61 +399,14 @@
             .checkbox-group {
                 grid-template-columns: 1fr;
             }
-        }
 
-        .info-icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background: #2196f3;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 20px;
-            font-size: 12px;
-            margin-left: 5px;
-            cursor: help;
-        }
+            .tab-navigation {
+                flex-direction: column;
+            }
 
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 250px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -125px;
-            font-size: 14px;
-            line-height: 1.3;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-        }
-
-        .percentage-display {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .budget-impact {
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-align: center;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+            .tab-button {
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
@@ -310,148 +414,327 @@
     <div class="container">
         <div class="header">
             <h1>🚗 Toyota Leasing Calculator</h1>
-            <p>คำนวณโปรแกรมเช่าซื้อรถโตโยต้า มิถุนายน 2568</p>
+            <p>คำนวณโปรแกรมเช่าซื้อและสบายดี กรกฎาคม 2568 <span class="new-badge">UPDATED</span></p>
         </div>
 
-        <div class="main-content">
-            <div class="form-section">
-                <h2>📝 ข้อมูลการคำนวณ</h2>
-                
-                <div class="form-group">
-                    <label for="carModel">รุ่นรถ:</label>
-                    <select id="carModel" onchange="updateAvailableTerms()">
-                        <option value="">-- เลือกรุ่นรถ --</option>
-                        <option value="Ativ">Toyota Ativ</option>
-                        <option value="Yaris">Toyota Yaris</option>
-                        <option value="Yaris_Cross">Toyota Yaris Cross</option>
-                        <option value="Veloz">Toyota Veloz</option>
-                        <option value="Corolla_Cross">Toyota Corolla Cross</option>
-                        <option value="Corolla_Altis">Toyota Corolla Altis</option>
-                        <option value="Camry">Toyota Camry</option>
-                        <option value="Fortuner">Toyota Fortuner</option>
-                        <option value="Innova">Toyota Innova</option>
-                        <option value="Revo_BCab">Toyota Revo Standard (B-Cab)</option>
-                        <option value="Revo_CCab">Toyota Revo Smartcab (C-Cab)</option>
-                        <option value="Revo_DCab">Toyota Revo Doublecab (D-Cab)</option>
-                        <option value="Hilux_Champ">Toyota Hilux Champ</option>
-                    </select>
-                </div>
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-button active" onclick="switchTab('traditional')">
+                💰 การเช่าซื้อแบบดั้งเดิม
+            </button>
+            <button class="tab-button" onclick="switchTab('sabaidee')">
+                ✨ โปรแกรมสบายดี
+            </button>
+        </div>
 
-                <div class="form-group">
-                    <label for="carPrice">ราคารถ (บาท):</label>
-                    <input type="number" id="carPrice" placeholder="เช่น 600000" min="50000" step="1000">
-                </div>
-
-                <div class="form-group">
-                    <label for="downPayment">งบดาวน์ที่มี (บาท):</label>
-                    <input type="number" id="downPayment" placeholder="เช่น 80000" min="0" step="1000" oninput="updateDownPaymentPercentage()">
-                    <div class="percentage-display" id="downPaymentPercentage"></div>
-                    <div class="tooltip">
-                        <span class="info-icon">?</span>
-                        <span class="tooltiptext">ระบุงบประมาณดาวน์ที่มี ระบบจะหาเกณฑ์ขั้นต่ำที่เป็นไปได้ (5%, 10%, 15%, 20%, 25%) และแสดงเงินที่ต้องเพิ่มหากไม่พอ</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="loanTerm">จำนวนงวด (เดือน):</label>
-                    <select id="loanTerm">
-                        <option value="">-- เลือกจำนวนงวด --</option>
-                        <option value="48">48 เดือน (4 ปี)</option>
-                        <option value="60">60 เดือน (5 ปี)</option>
-                        <option value="72">72 เดือน (6 ปี)</option>
-                        <option value="84">84 เดือน (7 ปี)</option>
-                        <option value="96">96 เดือน (8 ปี)</option>
-                        <option value="108">108 เดือน (9 ปี)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="monthlyPayment">จำนวนเงินผ่อนที่ต้องการ (บาท/เดือน) - ไม่บังคับ:</label>
-                    <input type="number" id="monthlyPayment" placeholder="เช่น 15000" min="1000" step="100">
-                    <div class="tooltip">
-                        <span class="info-icon">?</span>
-                        <span class="tooltiptext">หากระบุจำนวนเงินผ่อน ระบบจะแนะนำเงื่อนไขที่เหมาะสม</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>โปรแกรมพิเศษ:</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="promo_ativ_yaris" value="Ativ_Yaris_2566">
-                            <label for="promo_ativ_yaris">Ativ/Yaris 2566 (ต่ำสุด 0%)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="promo_fortuner" value="Fortuner_2567">
-                            <label for="promo_fortuner">Fortuner 2567 (ต่ำสุด 0.89%)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="promo_veloz" value="Veloz_Special">
-                            <label for="promo_veloz">Veloz Special (ต่ำสุด 0%)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>โปรแกรมลูกค้า:</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="customer_tlt" value="TLT_A_Grade">
-                            <label for="customer_tlt">TLT A-Grade (ส่วนลด 0.20%)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="customer_kubota" value="Kubota_A_Grade">
-                            <label for="customer_kubota">Kubota A-Grade (ส่วนลด 0.20%)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="customer_buy_more" value="Buy_More">
-                            <label for="customer_buy_more">Buy More (ส่วนลด 0.15%)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="customer_buy_easy" value="Buy_Easy">
-                            <label for="customer_buy_easy">Buy Easy (ส่วนลด 0.15%)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="customer_household" value="Household">
-                            <label for="customer_household">Household (ส่วนลด 0.15%)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="customer_special" value="Special_Profession">
-                            <label for="customer_special">อาชีพพิเศษ (ส่วนลด 0.30%)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="calculate-btn" onclick="calculateFinancing()">🧮 คำนวณ</button>
+        <!-- Traditional Leasing Tab -->
+        <div id="traditional-tab" class="tab-content active">
+            <div class="tab-indicator">
+                📋 การคำนวณเช่าซื้อแบบดั้งเดิม - ผ่อนต่อเดือนเท่าๆ กัน
             </div>
+            
+            <div class="main-content">
+                <div class="form-section">
+                    <h2>📝 ข้อมูลการคำนวณ</h2>
+                    
+                    <div class="form-group">
+                        <label for="carModel">รุ่นรถ:</label>
+                        <select id="carModel" onchange="updateAvailableTerms('traditional')">
+                            <option value="">-- เลือกรุ่นรถ --</option>
+                            <option value="Ativ">Toyota Ativ</option>
+                            <option value="Yaris">Toyota Yaris</option>
+                            <option value="Yaris_Cross">Toyota Yaris Cross</option>
+                            <option value="Veloz">Toyota Veloz</option>
+                            <option value="Corolla_Cross">Toyota Corolla Cross</option>
+                            <option value="Corolla_Altis">Toyota Corolla Altis</option>
+                            <option value="Camry">Toyota Camry</option>
+                            <option value="Fortuner">Toyota Fortuner</option>
+                            <option value="Innova">Toyota Innova</option>
+                            <option value="Revo_BCab">Toyota Revo Standard (B-Cab)</option>
+                            <option value="Revo_CCab">Toyota Revo SmartCab (C-Cab)</option>
+                            <option value="Revo_DCab">Toyota Revo Doublecab (D-Cab)</option>
+                            <option value="Hilux_Champ">Toyota Hilux Champ</option>
+                        </select>
+                    </div>
 
-            <div class="result-section">
-                <h2>📊 ผลการคำนวณ</h2>
-                <div id="results">
-                    <div class="result-card">
-                        <p style="text-align: center; color: #666; padding: 40px;">
-                            🔍 กรุณากรอกข้อมูลและกดคำนวณเพื่อดูผลลัพธ์
-                        </p>
+                    <div class="form-group">
+                        <label for="carPrice">ราคารถ (บาท):</label>
+                        <input type="number" id="carPrice" placeholder="เช่น 600000" min="50000" step="1000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="downPayment">งบดาวน์ที่มี (บาท):</label>
+                        <input type="number" id="downPayment" placeholder="เช่น 80000" min="0" step="1000" oninput="updateDownPaymentPercentage('traditional')">
+                        <div class="percentage-display" id="downPaymentPercentage"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanTerm">จำนวนงวด (เดือน):</label>
+                        <select id="loanTerm">
+                            <option value="">-- เลือกจำนวนงวด --</option>
+                            <option value="48">48 เดือน (4 ปี)</option>
+                            <option value="60">60 เดือน (5 ปี)</option>
+                            <option value="72">72 เดือน (6 ปี)</option>
+                            <option value="84">84 เดือน (7 ปี)</option>
+                            <option value="96">96 เดือน (8 ปี)</option>
+                            <option value="108">108 เดือน (9 ปี)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>โปรแกรมพิเศษ:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="promo_ativ_yaris" value="Ativ_Yaris_2566">
+                                <label for="promo_ativ_yaris">Ativ/Yaris 2566 (ต่ำสุด 0%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="promo_fortuner" value="Fortuner_2567">
+                                <label for="promo_fortuner">Fortuner 2567 (ต่ำสุด 0.89%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="promo_veloz" value="Veloz_Special">
+                                <label for="promo_veloz">Veloz Special (ต่ำสุด 0%)</label>
+                            </div>
+                            <div class="checkbox-item new-feature">
+                                <input type="checkbox" id="promo_corolla_cross" value="Corolla_Cross_2567">
+                                <label for="promo_corolla_cross">Corolla Cross 2567 (ต่ำสุด 1.39%) <span class="new-badge">NEW</span></label>
+                            </div>
+                            <div class="checkbox-item new-feature">
+                                <input type="checkbox" id="promo_yaris_cross" value="Yaris_Cross_Special">
+                                <label for="promo_yaris_cross">Yaris Cross Special (ต่ำสุด 1.75%) <span class="new-badge">NEW</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>โปรแกรมลูกค้า:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="customer_tlt" value="TLT_A_Grade">
+                                <label for="customer_tlt">TLT A-Grade (ส่วนลด 0.20%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="customer_kubota" value="Kubota_A_Grade">
+                                <label for="customer_kubota">Kubota A-Grade (ส่วนลด 0.20%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="customer_buy_more" value="Buy_More">
+                                <label for="customer_buy_more">Buy More (ส่วนลด 0.15%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="customer_buy_easy" value="Buy_Easy">
+                                <label for="customer_buy_easy">Buy Easy (ส่วนลด 0.15%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="customer_household" value="Household">
+                                <label for="customer_household">Household (ส่วนลด 0.15%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="customer_special" value="Special_Profession">
+                                <label for="customer_special">อาชีพพิเศษ (ส่วนลด 0.30%)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="discount-section">
+                        <div class="discount-title">💰 ส่วนลดดอกเบี้ยเพิ่มเติม</div>
+                        <div class="form-group">
+                            <label for="additionalDiscount">ส่วนลดดอกเบี้ยพิเศษ (%):</label>
+                            <div class="input-group">
+                                <input type="number" id="additionalDiscount" placeholder="เช่น 0.50" min="0" max="5" step="0.01">
+                                <span class="unit-label">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="calculate-btn" onclick="calculateFinancing()">🧮 คำนวณ</button>
+                </div>
+
+                <div class="result-section">
+                    <h2>📊 ผลการคำนวณ</h2>
+                    <div id="results">
+                        <div class="result-card">
+                            <p style="text-align: center; color: #666; padding: 40px;">
+                                🔍 กรุณากรอกข้อมูลและกดคำนวณเพื่อดูผลลัพธ์
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sabaidee Tab -->
+        <div id="sabaidee-tab" class="tab-content">
+            <div class="tab-indicator">
+                ✨ โปรแกรมสบายดี - ค่างวดต่ำ มีมูลค่าคงเหลือ (RV) ที่ท้ายสัญญา
+            </div>
+            
+            <div class="main-content">
+                <div class="form-section">
+                    <h2>📝 ข้อมูลการคำนวณสบายดี</h2>
+                    
+                    <div class="form-group">
+                        <label for="sabaideeCarModel">รุ่นรถ:</label>
+                        <select id="sabaideeCarModel" onchange="updateSabaideeOptions()">
+                            <option value="">-- เลือกรุ่นรถ --</option>
+                            <option value="Ativ">Toyota Ativ</option>
+                            <option value="Yaris">Toyota Yaris</option>
+                            <option value="Yaris_Cross">Toyota Yaris Cross</option>
+                            <option value="Veloz">Toyota Veloz</option>
+                            <option value="Corolla_Cross">Toyota Corolla Cross</option>
+                            <option value="Corolla_Altis">Toyota Corolla Altis</option>
+                            <option value="Fortuner">Toyota Fortuner</option>
+                            <option value="Innova">Toyota Innova</option>
+                            <option value="Revo_BCab">Toyota Revo Standard (B-Cab)</option>
+                            <option value="Revo_CCab">Toyota Revo SmartCab (C-Cab)</option>
+                            <option value="Revo_DCab">Toyota Revo Doublecab (D-Cab)</option>
+                            <option value="Hilux_Champ">Toyota Hilux Champ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sabaideeCarPrice">ราคารถ (บาท):</label>
+                        <input type="number" id="sabaideeCarPrice" placeholder="เช่น 600000" min="50000" step="1000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sabaideeDownPayment">งบดาวน์ที่มี (บาท):</label>
+                        <input type="number" id="sabaideeDownPayment" placeholder="เช่น 80000" min="0" step="1000" oninput="updateDownPaymentPercentage('sabaidee')">
+                        <div class="percentage-display" id="sabaideeDownPaymentPercentage"></div>
+                    </div>
+
+                    <div class="sabaidee-options">
+                        <div class="sabaidee-title">✨ ตัวเลือกโปรแกรมสบายดี</div>
+                        <div class="form-group">
+                            <label for="sabaideeProgram">โปรแกรม:</label>
+                            <select id="sabaideeProgram" onchange="updateSabaideeTerms()">
+                                <option value="">-- เลือกโปรแกรม --</option>
+                                <option value="standard">สบายดีมาตรฐาน</option>
+                                <option value="revolution">สบายดีรีโวลูชั่น</option>
+                                <option value="stair_step">สบายดี Stair Step</option>
+                                <option value="seven_years">สบายดี 7 ปี</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sabaideeTerm">ระยะเวลา:</label>
+                            <select id="sabaideeTerm" onchange="updateRVDisplay()">
+                                <option value="">-- เลือกระยะเวลา --</option>
+                            </select>
+                        </div>
+
+                        <div id="rvDisplay" class="rv-display" style="display: none;">
+                            <div class="result-row">
+                                <span class="result-label">มูลค่าคงเหลือ (RV):</span>
+                                <span class="rv-value" id="rvPercentage">-</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">จำนวนเงิน RV:</span>
+                                <span class="rv-value" id="rvAmount">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>โปรแกรมลูกค้า (สบายดี):</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sabaidee_customer_tlt" value="TLT_A_Grade">
+                                <label for="sabaidee_customer_tlt">TLT A-Grade (ส่วนลด 0.20%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sabaidee_customer_kubota" value="Kubota_A_Grade">
+                                <label for="sabaidee_customer_kubota">Kubota A-Grade (ส่วนลด 0.20%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sabaidee_customer_buy_more" value="Buy_More">
+                                <label for="sabaidee_customer_buy_more">Buy More (ส่วนลด 0.15%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sabaidee_customer_buy_easy" value="Buy_Easy">
+                                <label for="sabaidee_customer_buy_easy">Buy Easy (ส่วนลด 0.15%)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sabaidee_customer_special" value="Special_Profession">
+                                <label for="sabaidee_customer_special">อาชีพพิเศษ (ส่วนลด 0.30%)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="calculate-btn" onclick="calculateSabaidee()">✨ คำนวณสบายดี</button>
+                </div>
+
+                <div class="result-section">
+                    <h2>📊 ผลการคำนวณสบายดี</h2>
+                    <div id="sabaideeResults">
+                        <div class="result-card">
+                            <p style="text-align: center; color: #666; padding: 40px;">
+                                🔍 กรุณากรอกข้อมูลและกดคำนวณเพื่อดูผลลัพธ์
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="promotions-section">
-            <h2>🎉 โปรโมชั่นและแคมเปญพิเศษ</h2>
+            <h2>🎉 โปรโมชั่นและแคมเปญพิเศษ กรกฎาคม 2568</h2>
             <div id="promotions-list">
-                <!-- โปรโมชั่นจะถูกโหลดด้วย JavaScript -->
+                <div class="promo-card new">
+                    <div class="promo-title">🚗 แคมเปญดอกเบี้ยพิเศษ Ativ/Yaris 2566</div>
+                    <div class="promo-details">อัตราดอกเบี้ยต่ำสุด 0% ที่ดาวน์ 25% ระยะเวลา 48 เดือน (1-31 ก.ค. 2568)</div>
+                </div>
+                <div class="promo-card new">
+                    <div class="promo-title">🏔️ แคมเปญดอกเบี้ยพิเศษ Fortuner 2567</div>
+                    <div class="promo-details">อัตราดอกเบี้ยต่ำสุด 0.89% ที่ดาวน์ 25% ระยะเวลา 48 เดือน (1-31 ก.ค. 2568)</div>
+                </div>
+                <div class="promo-card">
+                    <div class="promo-title">⭐ แคมเปญดอกเบี้ยพิเศษ Veloz</div>
+                    <div class="promo-details">อัตราดอกเบี้ยต่ำสุด 0% ที่ดาวน์ 25% ระยะเวลา 60 เดือน (1 มี.ค. - 31 ก.ค. 2568)</div>
+                </div>
+                <div class="promo-card new">
+                    <div class="promo-title">🎯 แคมเปญค่าตอบแทนพิเศษสัญญาสบายดี</div>
+                    <div class="promo-details">ค่าตอบแทนพิเศษ 500-1,000 บาท/สัญญา สำหรับสัญญาสบายดี (1-31 ก.ค. 2568)</div>
+                </div>
+                <div class="promo-card">
+                    <div class="promo-title">🛡️ แคมเปญประกันภัย Toyota Care</div>
+                    <div class="promo-details">รางวัลพิเศษ 500-1,000 บาท สำหรับประกันภัยประเภท 1 (1-31 ก.ค. 2568)</div>
+                </div>
+                <div class="promo-card">
+                    <div class="promo-title">🌿 ส่วนลดรถไฮบริด</div>
+                    <div class="promo-details">ส่วนลดดอกเบี้ย 0.10% สำหรับรถไฮบริดทุกรุ่น (ตลอดปี 2568)</div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ข้อมูลระบบ Toyota Leasing
+        // ฟังก์ชันสลับแท็บ
+        function switchTab(tabName) {
+            // ซ่อนแท็บทั้งหมด
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // ปิดปุ่มแท็บทั้งหมด
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // เปิดแท็บที่เลือก
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // เปิดปุ่มแท็บที่เลือก
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+        }
+
+        // ข้อมูลระบบ Toyota Leasing - อัปเดตเดือนกรกฎาคม 2568
         const ToyotaLeasingSystem = {
             info: {
-                title: "โปรแกรมสนับสนุนการขายประจำเดือนมิถุนายน 2568",
+                title: "โปรแกรมสนับสนุนการขายประจำเดือนกรกฎาคม 2568",
                 company: "บริษัท โตโยต้าลีสซิ่ง (ประเทศไทย) จำกัด",
-                period: "1-30 มิถุนายน 2568"
+                period: "1-31 กรกฎาคม 2568"
             },
             
             standardRates: {
@@ -526,11 +809,11 @@
                     "25%": { "48": 2.39, "60": 3.39, "72": 3.69, "84": 4.49, "96": 4.99 }
                 },
                 "Revo_CCab": {
-                    "5%": { "48": 4.90, "60": 5.25, "72": 5.45, "84": 5.55 },
-                    "10%": { "48": 4.10, "60": 4.35, "72": 4.90, "84": 5.40 },
-                    "15%": { "48": 3.55, "60": 3.85, "72": 4.30, "84": 5.00, "96": 5.50 },
-                    "20%": { "48": 2.80, "60": 3.40, "72": 3.80, "84": 4.50, "96": 5.00 },
-                    "25%": { "48": 2.39, "60": 3.30, "72": 3.60, "84": 4.30, "96": 4.80 }
+                    "5%": { "48": 4.95, "60": 5.25, "72": 5.40, "84": 5.52 },
+                    "10%": { "48": 4.10, "60": 4.35, "72": 4.90, "84": 5.47 },
+                    "15%": { "48": 3.55, "60": 3.85, "72": 4.32, "84": 5.02, "96": 5.52 },
+                    "20%": { "48": 2.80, "60": 3.39, "72": 3.80, "84": 4.50, "96": 5.00 },
+                    "25%": { "48": 2.39, "60": 3.29, "72": 3.59, "84": 4.29, "96": 4.79 }
                 },
                 "Revo_DCab": {
                     "5%": { "48": 4.80, "60": 5.15, "72": 5.45, "84": 5.55 },
@@ -552,24 +835,24 @@
                 "Ativ_Yaris_2566": {
                     description: "ดอกเบี้ยพิเศษเพื่อการโฆษณาประชาสัมพันธ์ สำหรับรถเอทีฟใหม่ และยาริส ปี 2566",
                     models: ["Ativ", "Yaris"],
-                    period: "1-30 มิ.ย. 2568",
-                    deliveryDeadline: "31 ก.ค. 2568",
+                    period: "1-31 ก.ค. 2568",
+                    deliveryDeadline: "31 ส.ค. 2568",
                     dealerSubsidy: 9000,
                     lowestRate: 0,
                     conditions: "อัตราดอกเบี้ยต่ำสุด 0% ที่ดาวน์ 25% ระยะเวลา 48 เดือน",
                     rates: {
                         "5%": { "48": 2.60, "60": 3.20, "72": 3.80, "84": 4.39 },
                         "10%": { "48": 2.15, "60": 2.70, "72": 3.25, "84": 4.00 },
-                        "15%": { "48": 1.30, "60": 1.95, "72": 2.60, "84": 3.20, "96": 3.75 },
-                        "20%": { "48": 0.79, "60": 1.45, "72": 1.85, "84": 2.50, "96": 3.29 },
-                        "25%": { "48": 0, "60": 1.25, "72": 1.69, "84": 2.30, "96": 3.05 }
+                        "15%": { "48": 1.30, "60": 1.95, "72": 2.60, "84": 2.95, "96": 3.75 },
+                        "20%": { "48": 0.79, "60": 1.45, "72": 1.85, "84": 2.39, "96": 3.29 },
+                        "25%": { "48": 0, "60": 1.25, "72": 1.69, "84": 2.15, "96": 3.05 }
                     }
                 },
                 "Fortuner_2567": {
                     description: "ดอกเบี้ยพิเศษเพื่อการโฆษณาประชาสัมพันธ์ สำหรับรถฟอร์จูนเนอร์ ปี 2567",
                     models: ["Fortuner"],
-                    period: "1-30 มิ.ย. 2568",
-                    deliveryDeadline: "31 ก.ค. 2568",
+                    period: "1-31 ก.ค. 2568",
+                    deliveryDeadline: "31 ส.ค. 2568",
                     dealerSubsidy: { "Leader": 17000, "Legender_GR_Sport": 37000 },
                     lowestRate: 0.89,
                     conditions: "อัตราดอกเบี้ยต่ำสุด 0.89% ที่ดาวน์ 25% ระยะเวลา 48 เดือน",
@@ -578,14 +861,14 @@
                         "10%": { "48": 2.50, "60": 3.00, "72": 3.49, "84": 4.19 },
                         "15%": { "48": 1.70, "60": 2.30, "72": 2.89, "84": 3.39, "96": 3.95 },
                         "20%": { "48": 1.35, "60": 1.85, "72": 2.25, "84": 2.79, "96": 3.50 },
-                        "25%": { "48": 0.89, "60": 1.65, "72": 2.05, "84": 2.65, "96": 3.25 }
+                        "25%": { "48": 0.89, "60": 1.65, "72": 2.05, "84": 2.55, "96": 3.25 }
                     }
                 },
                 "Veloz_Special": {
                     description: "ดอกเบี้ยพิเศษเพื่อการโฆษณาประชาสัมพันธ์ สำหรับรถเวลอซ",
                     models: ["Veloz"],
-                    period: "1 มี.ค. - 30 มิ.ย. 2568",
-                    deliveryDeadline: "31 ก.ค. 2568",
+                    period: "1 มี.ค. - 31 ก.ค. 2568",
+                    deliveryDeadline: "31 ส.ค. 2568",
                     dealerSubsidy: 9000,
                     lowestRate: 0,
                     conditions: "อัตราดอกเบี้ยต่ำสุด 0% ที่ดาวน์ 25% ระยะเวลา 60 เดือน",
@@ -595,6 +878,38 @@
                         "15%": { "48": 0.90, "60": 1.65, "72": 2.30, "84": 2.90 },
                         "20%": { "48": 0.39, "60": 1.15, "72": 1.65, "84": 2.30 },
                         "25%": { "48": 0, "60": 0, "72": 1.45, "84": 2.09 }
+                    }
+                },
+                "Corolla_Cross_2567": {
+                    description: "ดอกเบี้ยพิเศษเพื่อการโฆษณาประชาสัมพันธ์ สำหรับรถโคโรลล่า ครอส รุ่นปรับปรุง ปี 2567",
+                    models: ["Corolla_Cross"],
+                    period: "1 มี.ค. - 31 ก.ค. 2568",
+                    deliveryDeadline: "31 ส.ค. 2568",
+                    dealerSubsidy: 4000,
+                    lowestRate: 1.39,
+                    conditions: "อัตราดอกเบี้ยต่ำสุด 1.39% ที่ดาวน์ 25% ระยะเวลา 48 เดือน",
+                    rates: {
+                        "5%": { "48": 3.40, "60": 3.90, "72": 4.35, "84": 4.95 },
+                        "10%": { "48": 3.00, "60": 3.40, "72": 3.89, "84": 4.55 },
+                        "15%": { "48": 2.20, "60": 2.75, "72": 3.29, "84": 3.79 },
+                        "20%": { "48": 1.79, "60": 2.29, "72": 2.60, "84": 3.19 },
+                        "25%": { "48": 1.39, "60": 2.09, "72": 2.49, "84": 2.99 }
+                    }
+                },
+                "Yaris_Cross_Special": {
+                    description: "ดอกเบี้ยพิเศษเพื่อการโฆษณาประชาสัมพันธ์ สำหรับยาริส ครอส",
+                    models: ["Yaris_Cross"],
+                    period: "1 มี.ค. - 31 ก.ค. 2568",
+                    deliveryDeadline: "31 ส.ค. 2568",
+                    dealerSubsidy: null,
+                    lowestRate: 1.75,
+                    conditions: "อัตราดอกเบี้ยต่ำสุด 1.75% ที่ดาวน์ 25% ระยะเวลา 48 เดือน",
+                    rates: {
+                        "5%": { "48": 3.69, "60": 3.99, "72": 4.45, "84": 4.89 },
+                        "10%": { "48": 3.29, "60": 3.59, "72": 3.95, "84": 4.55 },
+                        "15%": { "48": 2.49, "60": 2.89, "72": 3.35, "84": 3.75, "96": 4.25 },
+                        "20%": { "48": 1.99, "60": 2.35, "72": 2.55, "84": 3.05, "96": 3.79 },
+                        "25%": { "48": 1.75, "60": 2.19, "72": 2.45, "84": 2.99, "96": 3.69 }
                     }
                 }
             },
@@ -630,6 +945,77 @@
                     interestDiscount: 0.30,
                     benefits: "ส่วนลดดอกเบี้ย 0.50% หรือ ส่วนลดดอกเบี้ย 0.20% + ค่าสนับสนุนการขาย 10,000 บาท"
                 }
+            },
+
+            // โปรแกรมสบายดี (แก้ไข)
+            sabaideePrograms: {
+                "standard": {
+                    description: "โปรแกรมสบายดี",
+                    terms: [48, 60],
+                    RV: {
+                        "Ativ": { "48": 45, "60": 40 },
+                        "Yaris": { "48": 45, "60": 40 },
+                        "Yaris_Cross": { "48": 45, "60": 40 },
+                        "Veloz": { "48": 45, "60": 40 },
+                        "Corolla_Cross": { "48": 45, "60": 40 },
+                        "Corolla_Altis": { "48": 45, "60": 40 },
+                        "Fortuner": { "48": 45, "60": 40 },
+                        "Innova": { "48": 45, "60": 40 },
+                        "Revo_BCab": { "48": 35, "60": 30 },
+                        "Revo_CCab": { "48": 35, "60": 30 },
+                        "Revo_DCab": { "48": 35, "60": 30 },
+                        "Hilux_Champ": { "48": 35, "60": 30 }
+                    }
+                },
+                "revolution": {
+                    description: "โปรแกรมสบายดีรีโวลูชั่น",
+                    terms: [48, 60],
+                    RV: {
+                        "Ativ": { "48": 45, "60": 40 },
+                        "Yaris": { "48": 45, "60": 40 },
+                        "Yaris_Cross": { "48": 45, "60": 40 },
+                        "Veloz": { "48": 45, "60": 40 },
+                        "Corolla_Cross": { "48": 45, "60": 40 },
+                        "Corolla_Altis": { "48": 45, "60": 40 },
+                        "Fortuner": { "48": 45, "60": 40 },
+                        "Innova": { "48": 45, "60": 40 },
+                        "Revo_BCab": { "48": 35, "60": 30 },
+                        "Revo_CCab": { "48": 35, "60": 30 },
+                        "Revo_DCab": { "48": 35, "60": 30 },
+                        "Hilux_Champ": { "48": 35, "60": 30 }
+                    }
+                },
+                "stair_step": {
+                    description: "โปรแกรมสบายดี Stair Step",
+                    terms: [48, 60],
+                    steps: {
+                        step1: { months: 12, percentage: 14 },
+                        step2: { months: 24, percentage: 42 },
+                        step3: { months: 12, percentage: 44 }
+                    },
+                    RV: {
+                        "Ativ": { "48": 45, "60": 40 },
+                        "Yaris": { "48": 45, "60": 40 },
+                        "Yaris_Cross": { "48": 45, "60": 40 },
+                        "Veloz": { "48": 45, "60": 40 },
+                        "Corolla_Cross": { "48": 45, "60": 40 },
+                        "Corolla_Altis": { "48": 45, "60": 40 },
+                        "Fortuner": { "48": 45, "60": 40 },
+                        "Innova": { "48": 45, "60": 40 },
+                        "Revo_BCab": { "48": 35, "60": 30 },
+                        "Revo_CCab": { "48": 35, "60": 30 },
+                        "Revo_DCab": { "48": 35, "60": 30 },
+                        "Hilux_Champ": { "48": 35, "60": 30 }
+                    }
+                },
+                "seven_years": {
+                    description: "โปรแกรมสบายดี 7 ปี",
+                    minDownPayment: 10,
+                    term: 84,
+                    RV: 20,
+                    applicableModels: ["Ativ", "Yaris", "Yaris_Cross", "Revo_BCab", "Revo_CCab", "Revo_DCab", "Hilux_Champ"],
+                    commission: "8% สูงสุด 72 เดือน + ค่าตอบแทนพิเศษ 500 บาท"
+                }
             }
         };
 
@@ -637,7 +1023,6 @@
         function findMinimumDownPaymentPercent(actualPercent, model, term, promotion = null) {
             const availablePercents = [5, 10, 15, 20, 25];
             
-            // หาเปอร์เซ็นต์ที่มากกว่าหรือเท่ากับเปอร์เซ็นต์ที่มี และมีอัตราดอกเบี้ย
             for (let percent of availablePercents) {
                 if (percent >= actualPercent) {
                     const rate = getInterestRate(model, percent, term, promotion);
@@ -647,7 +1032,6 @@
                 }
             }
             
-            // ถ้าไม่พบ ให้หาเปอร์เซ็นต์ใดๆ ที่มีอัตราดอกเบี้ย
             for (let percent of availablePercents) {
                 const rate = getInterestRate(model, percent, term, promotion);
                 if (rate !== null) {
@@ -655,65 +1039,85 @@
                 }
             }
             
-            return null; // ไม่พบอัตราดอกเบี้ยเลย
+            return null;
         }
 
         // ฟังก์ชันอัพเดทแสดงเปอร์เซ็นต์เงินดาวน์
-        function updateDownPaymentPercentage() {
-            const price = parseFloat(document.getElementById('carPrice').value);
-            const downPayment = parseFloat(document.getElementById('downPayment').value);
-            const model = document.getElementById('carModel').value;
-            const term = parseInt(document.getElementById('loanTerm').value);
-            const percentageDiv = document.getElementById('downPaymentPercentage');
+        function updateDownPaymentPercentage(tabType) {
+            const priceId = tabType === 'sabaidee' ? 'sabaideeCarPrice' : 'carPrice';
+            const downPaymentId = tabType === 'sabaidee' ? 'sabaideeDownPayment' : 'downPayment';
+            const modelId = tabType === 'sabaidee' ? 'sabaideeCarModel' : 'carModel';
+            const termId = tabType === 'sabaidee' ? 'sabaideeTerm' : 'loanTerm';
+            const percentageId = tabType === 'sabaidee' ? 'sabaideeDownPaymentPercentage' : 'downPaymentPercentage';
             
-            if (price && downPayment && price > 0 && model && term) {
+            const price = parseFloat(document.getElementById(priceId).value);
+            const downPayment = parseFloat(document.getElementById(downPaymentId).value);
+            const model = document.getElementById(modelId).value;
+            const term = parseInt(document.getElementById(termId).value);
+            const percentageDiv = document.getElementById(percentageId);
+            
+            if (price && downPayment && price > 0) {
                 const actualPercent = (downPayment / price * 100).toFixed(1);
                 
-                // หา promotions ที่เลือกไว้
-                const selectedPromotions = [];
-                document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-                    if (!checkbox.value.includes('_Grade') && !checkbox.value.includes('_More') && 
-                        !checkbox.value.includes('_Easy') && checkbox.value !== 'Household' && 
-                        checkbox.value !== 'Special_Profession') {
-                        selectedPromotions.push(checkbox.value);
+                if (tabType === 'sabaidee') {
+                    // สำหรับสบายดี ไม่ต้องตรวจสอบเปอร์เซ็นต์ขั้นต่ำแบบเดียวกัน
+                    percentageDiv.textContent = `คิดเป็น ${actualPercent}% ของราคารถ`;
+                    percentageDiv.style.color = '#666';
+                    
+                    // อัพเดท RV Display
+                    updateRVDisplay();
+                } else if (model && term) {
+                    // แบบเดิมสำหรับการเช่าซื้อปกติ
+                    const selectedPromotions = [];
+                    document.querySelectorAll('#traditional-tab input[type="checkbox"]:checked').forEach(checkbox => {
+                        if (!checkbox.value.includes('_Grade') && !checkbox.value.includes('_More') && 
+                            !checkbox.value.includes('_Easy') && checkbox.value !== 'Household' && 
+                            checkbox.value !== 'Special_Profession') {
+                            selectedPromotions.push(checkbox.value);
+                        }
+                    });
+                    
+                    const minPercent = findMinimumDownPaymentPercent(parseFloat(actualPercent), model, term, selectedPromotions[0]);
+                    
+                    if (minPercent === null) {
+                        percentageDiv.textContent = `คิดเป็น ${actualPercent}% | ไม่พบอัตราดอกเบี้ยสำหรับ ${model} งวด ${term} เดือน`;
+                        percentageDiv.style.color = '#d32f2f';
+                        return;
                     }
-                });
-                
-                const minPercent = findMinimumDownPaymentPercent(parseFloat(actualPercent), model, term, selectedPromotions[0]);
-                
-                if (minPercent === null) {
-                    percentageDiv.textContent = `คิดเป็น ${actualPercent}% | ไม่พบอัตราดอกเบี้ยสำหรับ ${model} งวด ${term} เดือน`;
-                    percentageDiv.style.color = '#d32f2f';
-                    return;
-                }
-                
-                const criteriaAmount = Math.round(price * minPercent / 100);
-                const difference = criteriaAmount - downPayment;
-                
-                let displayText = `คิดเป็น ${actualPercent}% → ใช้เกณฑ์ขั้นต่ำ ${minPercent}% (${criteriaAmount.toLocaleString()} บาท)`;
-                
-                if (difference > 100) {
-                    displayText += ` | ต้องเพิ่มเงิน ${difference.toLocaleString()} บาท`;
-                    percentageDiv.style.color = '#d32f2f';
-                } else if (difference <= 0) {
-                    displayText += ` | งบดาวน์เพียงพอ`;
-                    percentageDiv.style.color = '#2e7d32';
+                    
+                    const criteriaAmount = Math.round(price * minPercent / 100);
+                    const difference = criteriaAmount - downPayment;
+                    
+                    let displayText = `คิดเป็น ${actualPercent}% → ใช้เกณฑ์ขั้นต่ำ ${minPercent}% (${criteriaAmount.toLocaleString()} บาท)`;
+                    
+                    if (difference > 100) {
+                        displayText += ` | ต้องเพิ่มเงิน ${difference.toLocaleString()} บาท`;
+                        percentageDiv.style.color = '#d32f2f';
+                    } else if (difference <= 0) {
+                        displayText += ` | งบดาวน์เพียงพอ`;
+                        percentageDiv.style.color = '#2e7d32';
+                    } else {
+                        percentageDiv.style.color = '#666';
+                    }
+                    
+                    percentageDiv.textContent = displayText;
                 } else {
+                    percentageDiv.textContent = `คิดเป็น ${actualPercent}% ของราคารถ`;
                     percentageDiv.style.color = '#666';
                 }
-                
-                percentageDiv.textContent = displayText;
             } else {
                 percentageDiv.textContent = '';
             }
         }
 
         // ฟังก์ชันอัพเดทตัวเลือกงวดตามรุ่นรถ
-        function updateAvailableTerms() {
-            const carModel = document.getElementById('carModel').value;
-            const termSelect = document.getElementById('loanTerm');
+        function updateAvailableTerms(tabType) {
+            const modelId = tabType === 'sabaidee' ? 'sabaideeCarModel' : 'carModel';
+            const termId = tabType === 'sabaidee' ? 'sabaideeTerm' : 'loanTerm';
             
-            // Clear existing options except first one
+            const carModel = document.getElementById(modelId).value;
+            const termSelect = document.getElementById(termId);
+            
             termSelect.innerHTML = '<option value="">-- เลือกจำนวนงวด --</option>';
             
             if (carModel && ToyotaLeasingSystem.standardRates[carModel]) {
@@ -740,8 +1144,106 @@
                 });
             }
             
-            // อัพเดทแสดงเปอร์เซ็นต์ดาวน์
-            updateDownPaymentPercentage();
+            updateDownPaymentPercentage(tabType);
+        }
+
+        // ฟังก์ชันอัพเดทตัวเลือกสบายดี
+        function updateSabaideeOptions() {
+            const model = document.getElementById('sabaideeCarModel').value;
+            const programSelect = document.getElementById('sabaideeProgram');
+            
+            // Reset program selection
+            programSelect.innerHTML = '<option value="">-- เลือกโปรแกรม --</option>';
+            
+            if (model) {
+                // Check which programs are available for this model
+                Object.entries(ToyotaLeasingSystem.sabaideePrograms).forEach(([key, program]) => {
+                    let isAvailable = true;
+                    
+                    // Check if model is applicable for seven_years program
+                    if (key === 'seven_years' && !program.applicableModels.includes(model)) {
+                        isAvailable = false;
+                    }
+                    
+                    if (isAvailable) {
+                        const option = document.createElement('option');
+                        option.value = key;
+                        option.textContent = program.description;
+                        programSelect.appendChild(option);
+                    }
+                });
+            }
+            
+            updateDownPaymentPercentage('sabaidee');
+        }
+
+        // ฟังก์ชันอัพเดทงวดสบายดี
+        function updateSabaideeTerms() {
+            const program = document.getElementById('sabaideeProgram').value;
+            const termSelect = document.getElementById('sabaideeTerm');
+            
+            termSelect.innerHTML = '<option value="">-- เลือกระยะเวลา --</option>';
+            
+            if (program && ToyotaLeasingSystem.sabaideePrograms[program]) {
+                const programData = ToyotaLeasingSystem.sabaideePrograms[program];
+                
+                if (program === 'seven_years') {
+                    const option = document.createElement('option');
+                    option.value = '84';
+                    option.textContent = '84 เดือน (7 ปี)';
+                    termSelect.appendChild(option);
+                } else {
+                    programData.terms.forEach(term => {
+                        const option = document.createElement('option');
+                        option.value = term;
+                        const years = Math.floor(term / 12);
+                        option.textContent = `${term} เดือน (${years} ปี)`;
+                        termSelect.appendChild(option);
+                    });
+                }
+            }
+            
+            updateRVDisplay();
+        }
+
+        // ฟังก์ชันอัพเดทแสดง RV
+        function updateRVDisplay() {
+            const model = document.getElementById('sabaideeCarModel').value;
+            const program = document.getElementById('sabaideeProgram').value;
+            const term = document.getElementById('sabaideeTerm').value;
+            const price = parseFloat(document.getElementById('sabaideeCarPrice').value);
+            
+            const rvDisplay = document.getElementById('rvDisplay');
+            const rvPercentage = document.getElementById('rvPercentage');
+            const rvAmount = document.getElementById('rvAmount');
+            
+            if (model && program && term && price) {
+                const programData = ToyotaLeasingSystem.sabaideePrograms[program];
+                let rvPercent = 0;
+                
+                if (program === 'seven_years') {
+                    rvPercent = programData.RV;
+                } else {
+                    // หา RV จากตาราง
+                    const rvTable = programData.RV;
+                    
+                    // ดูว่ารุ่นรถนี้มีอยู่ในตาราง RV หรือไม่
+                    if (rvTable[model]) {
+                        rvPercent = rvTable[model][term] || 0;
+                    } else {
+                        // ถ้าไม่มี ให้ใช้ค่าเริ่มต้น
+                        rvPercent = 0;
+                    }
+                }
+                
+                const rvAmountValue = Math.round(price * rvPercent / 100);
+                
+                rvPercentage.textContent = `${rvPercent}%`;
+                rvAmount.textContent = `${rvAmountValue.toLocaleString()} บาท`;
+                rvDisplay.style.display = 'block';
+            } else {
+                rvDisplay.style.display = 'none';
+            }
         }
 
         // ฟังก์ชันหาอัตราดอกเบี้ย
@@ -780,57 +1282,247 @@
             return Math.max(baseRate - totalDiscount, 0);
         }
 
-        // ฟังก์ชันหาเงื่อนไขที่เหมาะสมตามค่างวดที่ต้องการ
-        function findBestConditions(model, price, targetPayment) {
-            const suggestions = [];
-            const downPaymentAmounts = [
-                price * 0.05, price * 0.10, price * 0.15, 
-                price * 0.20, price * 0.25, price * 0.30
-            ];
-            const terms = [48, 60, 72, 84, 96, 108];
+        // ฟังก์ชันคำนวณสบายดี (แก้ไข)
+        function calculateSabaidee() {
+            const model = document.getElementById('sabaideeCarModel').value;
+            const price = parseFloat(document.getElementById('sabaideeCarPrice').value);
+            const downPaymentAmount = parseFloat(document.getElementById('sabaideeDownPayment').value);
+            const program = document.getElementById('sabaideeProgram').value;
+            const term = parseInt(document.getElementById('sabaideeTerm').value);
             
-            downPaymentAmounts.forEach(downPaymentAmount => {
+            const resultsDiv = document.getElementById('sabaideeResults');
+            
+            // Validation
+            if (!model || !price || !downPaymentAmount || !program || !term) {
+                resultsDiv.innerHTML = `
+                    <div class="error-message">
+                        ❌ กรุณากรอกข้อมูลให้ครบถ้วน
+                    </div>
+                `;
+                return;
+            }
+
+            if (downPaymentAmount >= price) {
+                resultsDiv.innerHTML = `
+                    <div class="error-message">
+                        ❌ งบดาวน์ต้องน้อยกว่าราคารถ
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const programData = ToyotaLeasingSystem.sabaideePrograms[program];
                 const downPaymentPercent = (downPaymentAmount / price) * 100;
                 
-                terms.forEach(term => {
-                    const minPercent = findMinimumDownPaymentPercent(downPaymentPercent, model, term, null);
-                    
-                    if (minPercent !== null) {
-                        const criteriaAmount = Math.round(price * minPercent / 100);
-                        const loanAmount = price - criteriaAmount;
-                        const rate = getInterestRate(model, minPercent, term);
-                        
-                        if (rate !== null && loanAmount > 0) {
-                            const monthlyPayment = calculateMonthlyPayment(loanAmount, rate, term);
-                            const difference = Math.abs(monthlyPayment - targetPayment);
-                            const additionalBudget = Math.max(criteriaAmount - downPaymentAmount, 0);
-                            
-                            suggestions.push({
-                                downPaymentAmount: Math.round(downPaymentAmount),
-                                downPaymentPercent: minPercent,
-                                criteriaAmount,
-                                additionalBudget,
-                                term,
-                                rate,
-                                monthlyPayment,
-                                difference,
-                                loanAmount
-                            });
-                        }
+                // หา RV
+                let rvPercent = 0;
+                if (program === 'seven_years') {
+                    rvPercent = programData.RV;
+                } else {
+                    const rvTable = programData.RV;
+                    if (rvTable[model]) {
+                        rvPercent = rvTable[model][term] || 0;
                     }
+                }
+
+                const rvAmount = Math.round(price * rvPercent / 100);
+                const financeAmount = price - downPaymentAmount - rvAmount;
+                
+                // หาอัตราดอกเบี้ย (ใช้อัตราปกติ)
+                const minDownPaymentPercent = Math.ceil(downPaymentPercent / 5) * 5; // ปัดขึ้นเป็น 5, 10, 15, 20, 25
+                let interestRate = getInterestRate(model, Math.min(minDownPaymentPercent, 25), term);
+                
+                if (interestRate === null) {
+                    // ลองหาอัตราที่มี
+                    for (let percent of [5, 10, 15, 20, 25]) {
+                        interestRate = getInterestRate(model, percent, term);
+                        if (interestRate !== null) break;
+                    }
+                }
+
+                if (interestRate === null) {
+                    resultsDiv.innerHTML = `
+                        <div class="error-message">
+                            ❌ ไม่พบอัตราดอกเบี้ยสำหรับ ${model} งวด ${term} เดือน
+                        </div>
+                    `;
+                    return;
+                }
+
+                // รวบรวมโปรแกรมลูกค้าที่เลือก
+                const selectedCustomerPrograms = [];
+                document.querySelectorAll('#sabaidee-tab input[type="checkbox"]:checked').forEach(checkbox => {
+                    selectedCustomerPrograms.push(checkbox.value);
                 });
-            });
-            
-            return suggestions.sort((a, b) => a.difference - b.difference).slice(0, 3);
+
+                const originalRate = interestRate;
+                let customerProgramDiscount = 0;
+                
+                // ใช้ส่วนลดจากโปรแกรมลูกค้า
+                if (selectedCustomerPrograms.length > 0) {
+                    const discountedRate = applyCustomerDiscount(interestRate, selectedCustomerPrograms);
+                    customerProgramDiscount = interestRate - discountedRate;
+                    interestRate = discountedRate;
+                }
+
+                // คำนวณค่างวด
+                const monthlyPayment = calculateMonthlyPayment(financeAmount, interestRate, term);
+                const totalPayment = monthlyPayment * term;
+                const totalInterest = totalPayment - financeAmount;
+                const totalCost = downPaymentAmount + totalPayment; // ไม่รวม RV เพราะจะได้คืน
+
+                // สำหรับ Stair Step แสดงรายละเอียดพิเศษ
+                let stairStepHtml = '';
+                if (program === 'stair_step') {
+                    const step1Payment = Math.round(monthlyPayment * programData.steps.step1.percentage / 100);
+                    const step2Payment = Math.round(monthlyPayment * programData.steps.step2.percentage / 100);
+                    const step3Payment = Math.round(monthlyPayment * programData.steps.step3.percentage / 100);
+                    
+                    stairStepHtml = `
+                        <div class="result-card highlight">
+                            <h4>📈 รายละเอียด Stair Step</h4>
+                            <div class="result-row">
+                                <span class="result-label">งวดที่ 1-12 (14%):</span>
+                                <span class="result-value">${step1Payment.toLocaleString()} บาท/เดือน</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">งวดที่ 13-36 (42%):</span>
+                                <span class="result-value">${step2Payment.toLocaleString()} บาท/เดือน</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">งวดที่ 37-${term} (44%):</span>
+                                <span class="result-value">${step3Payment.toLocaleString()} บาท/เดือน</span>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                let resultHtml = `
+                    <div class="result-card">
+                        <h3>📋 ข้อมูลการคำนวณสบายดี</h3>
+                        <div class="result-row">
+                            <span class="result-label">รุ่นรถ:</span>
+                            <span class="result-value">${model.replace('_', ' ')}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">ราคารถ:</span>
+                            <span class="result-value">${price.toLocaleString()} บาท</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">โปรแกรม:</span>
+                            <span class="result-value">${programData.description}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">เงินดาวน์:</span>
+                            <span class="result-value">${downPaymentAmount.toLocaleString()} บาท (${downPaymentPercent.toFixed(1)}%)</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">มูลค่าคงเหลือ (RV):</span>
+                            <span class="result-value">${rvAmount.toLocaleString()} บาท (${rvPercent}%)</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">ยอดจัดไฟแนนซ์:</span>
+                            <span class="result-value">${financeAmount.toLocaleString()} บาท</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">ระยะเวลา:</span>
+                            <span class="result-value">${term} เดือน</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card highlight">
+                        <h3>💰 ผลการคำนวณสบายดี</h3>
+                        <div class="result-row">
+                            <span class="result-label">อัตราดอกเบี้ยเริ่มต้น:</span>
+                            <span class="result-value">${originalRate}% ต่อปี</span>
+                        </div>
+                `;
+
+                if (customerProgramDiscount > 0) {
+                    resultHtml += `
+                        <div class="result-row">
+                            <span class="result-label">ส่วนลดจากโปรแกรมลูกค้า:</span>
+                            <span class="result-value">-${customerProgramDiscount.toFixed(2)}%</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">อัตราดอกเบี้ยสุดท้าย:</span>
+                            <span class="result-value">${interestRate.toFixed(2)}% ต่อปี</span>
+                        </div>
+                    `;
+                }
+                
+                resultHtml += `
+                        <div class="result-row">
+                            <span class="result-label">ค่างวดต่อเดือน:</span>
+                            <span class="result-value" style="font-size: 1.3rem; color: #d32f2f; font-weight: 800;">${monthlyPayment.toLocaleString()} บาท</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">ยอดชำระรวม:</span>
+                            <span class="result-value">${totalPayment.toLocaleString()} บาท</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">ดอกเบี้ยรวม:</span>
+                            <span class="result-value">${totalInterest.toLocaleString()} บาท</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">เงินที่ต้องจ่ายรวม:</span>
+                            <span class="result-value">${totalCost.toLocaleString()} บาท</span>
+                        </div>
+                    </div>
+
+                    ${stairStepHtml}
+
+                    <div class="result-card budget-analysis">
+                        <h4>💡 ข้อมูลสำคัญ</h4>
+                        <p style="margin-bottom: 10px;"><strong>มูลค่าคงเหลือ (RV):</strong> ${rvAmount.toLocaleString()} บาท</p>
+                        <p style="margin-bottom: 10px;"><strong>ตัวเลือกเมื่อครบสัญญา:</strong></p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li>ซื้อรถในราคา RV ${rvAmount.toLocaleString()} บาท</li>
+                            <li>คืนรถให้บริษัท (ไม่ต้องจ่ายเพิ่ม หากสภาพรถตามเกณฑ์)</li>
+                            <li>ต่ออายุสัญญา (ตามเงื่อนไขบริษัท)</li>
+                        </ul>
+                    </div>
+                `;
+
+                // แสดงข้อมูลโปรแกรมลูกค้าที่ใช้
+                if (selectedCustomerPrograms.length > 0) {
+                    resultHtml += `<div class="result-card">
+                        <h3>🎁 โปรแกรมลูกค้าที่ใช้</h3>`;
+                    
+                    selectedCustomerPrograms.forEach(program => {
+                        const programData = ToyotaLeasingSystem.customerPrograms[program];
+                        if (programData) {
+                            resultHtml += `
+                                <div class="result-row">
+                                    <span class="result-label">โปรแกรม:</span>
+                                    <span class="result-value">${programData.description}</span>
+                                </div>
+                            `;
+                        }
+                    });
+                    
+                    resultHtml += `</div>`;
+                }
+                
+                resultsDiv.innerHTML = resultHtml;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="error-message">
+                        ❌ เกิดข้อผิดพลาดในการคำนวณ: ${error.message}
+                    </div>
+                `;
+            }
         }
 
-        // ฟังก์ชันหลักคำนวณ
+        // ฟังก์ชันหลักคำนวณ (เช่าซื้อแบบดั้งเดิม)
         function calculateFinancing() {
             const model = document.getElementById('carModel').value;
             const price = parseFloat(document.getElementById('carPrice').value);
             const downPaymentAmount = parseFloat(document.getElementById('downPayment').value);
             const term = parseInt(document.getElementById('loanTerm').value);
-            const targetPayment = parseFloat(document.getElementById('monthlyPayment').value);
+            const additionalDiscount = parseFloat(document.getElementById('additionalDiscount').value) || 0;
             
             const resultsDiv = document.getElementById('results');
             
@@ -842,39 +1534,6 @@
                     </div>
                 `;
                 return;
-            }
-
-            // หาเงื่อนไขที่เหมาะสมหากระบุค่างวดที่ต้องการ
-            if (targetPayment && (!downPaymentAmount || !term)) {
-                const suggestions = findBestConditions(model, price, targetPayment);
-                
-                if (suggestions.length > 0) {
-                    let suggestionsHtml = `
-                        <div class="result-card highlight">
-                            <h3>💡 เงื่อนไขที่แนะนำสำหรับค่างวด ${targetPayment.toLocaleString()} บาท/เดือน</h3>
-                    `;
-                    
-                    suggestions.forEach((suggestion, index) => {
-                        const additionalText = suggestion.additionalBudget > 0 ? 
-                            ` (+${suggestion.additionalBudget.toLocaleString()} บาท)` : '';
-                        suggestionsHtml += `
-                            <div class="result-row">
-                                <span class="result-label">ตัวเลือกที่ ${index + 1}: งบดาวน์ ${suggestion.downPaymentAmount.toLocaleString()} บาท${additionalText} → ${suggestion.downPaymentPercent}% งวด ${suggestion.term} เดือน</span>
-                                <span class="result-value">${suggestion.monthlyPayment.toLocaleString()} บาท/เดือน (ต่าง ${Math.abs(suggestion.monthlyPayment - targetPayment).toLocaleString()} บาท)</span>
-                            </div>
-                        `;
-                    });
-                    
-                    suggestionsHtml += `
-                        </div>
-                        <div style="text-align: center; margin-top: 15px;">
-                            <p>🔍 กรุณาเลือกงบดาวน์และจำนวนงวดจากตัวเลือกข้างต้น แล้วกดคำนวณอีกครั้งเพื่อดูรายละเอียดครบถ้วน</p>
-                        </div>
-                    `;
-                    
-                    resultsDiv.innerHTML = suggestionsHtml;
-                    return;
-                }
             }
 
             if (!downPaymentAmount || !term) {
@@ -900,7 +1559,7 @@
             const selectedPromotions = [];
             const selectedCustomerPrograms = [];
             
-            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+            document.querySelectorAll('#traditional-tab input[type="checkbox"]:checked').forEach(checkbox => {
                 if (checkbox.value.includes('_Grade') || checkbox.value.includes('_More') || 
                     checkbox.value.includes('_Easy') || checkbox.value === 'Household' || 
                     checkbox.value === 'Special_Profession') {
@@ -910,58 +1569,58 @@
                 }
             });
 
-            // คำนวณเปอร์เซ็นต์เงินดาวน์และหาเปอร์เซ็นต์ขั้นต่ำที่เป็นไปได้
-            const actualDownPaymentPercent = (downPaymentAmount / price) * 100;
-            const minDownPaymentPercent = findMinimumDownPaymentPercent(actualDownPaymentPercent, model, term, selectedPromotions[0]);
-            
-            if (minDownPaymentPercent === null) {
-                resultsDiv.innerHTML = `
-                    <div class="error-message">
-                        ❌ ไม่พบอัตราดอกเบี้ยสำหรับ ${model} งวด ${term} เดือน กับเปอร์เซ็นต์ดาวน์ใดๆ
-                        <br>💡 ลองเลือกรุ่นรถหรือจำนวนงวดอื่น
-                    </div>
-                `;
-                return;
-            }
-            
-            const criteriaDownPaymentAmount = Math.round(price * minDownPaymentPercent / 100);
-            
-            // คำนวณเงินที่ต้องเพิ่ม
-            const additionalBudgetNeeded = Math.max(criteriaDownPaymentAmount - downPaymentAmount, 0);
-
-            // คำนวณผลลัพธ์
             try {
-                // คำนวณยอดจัดไฟแนนซ์จากเกณฑ์ขั้นต่ำ
-                const loanAmount = price - criteriaDownPaymentAmount;
+                const downPaymentPercent = (downPaymentAmount / price) * 100;
+                const loanAmount = price - downPaymentAmount;
                 
-                // หาอัตราดอกเบี้ยพื้นฐาน
+                // หาเปอร์เซ็นต์ดาวน์ขั้นต่ำที่เป็นไปได้
+                const minDownPaymentPercent = findMinimumDownPaymentPercent(
+                    downPaymentPercent, model, term, selectedPromotions[0]
+                );
+                
+                if (minDownPaymentPercent === null) {
+                    resultsDiv.innerHTML = `
+                        <div class="error-message">
+                            ❌ ไม่พบอัตราดอกเบี้ยสำหรับ ${model} งวด ${term} เดือน
+                        </div>
+                    `;
+                    return;
+                }
+
+                // หาอัตราดอกเบี้ย
                 let interestRate = getInterestRate(model, minDownPaymentPercent, term, selectedPromotions[0]);
                 
                 if (interestRate === null) {
                     resultsDiv.innerHTML = `
                         <div class="error-message">
-                            ❌ ไม่พบอัตราดอกเบี้ยสำหรับ ${model} ดาวน์ ${minDownPaymentPercent}% งวด ${term} เดือน
-                            <br>💡 ลองปรับงบดาวน์ให้อยู่ใน 5%, 10%, 15%, 20%, หรือ 25% ของราคารถ
+                            ❌ ไม่พบอัตราดอกเบี้ยสำหรับ ${model} งวด ${term} เดือน
                         </div>
                     `;
                     return;
                 }
-                
+
                 const originalRate = interestRate;
+                let customerProgramDiscount = 0;
                 
                 // ใช้ส่วนลดจากโปรแกรมลูกค้า
                 if (selectedCustomerPrograms.length > 0) {
-                    interestRate = applyCustomerDiscount(interestRate, selectedCustomerPrograms);
+                    const discountedRate = applyCustomerDiscount(interestRate, selectedCustomerPrograms);
+                    customerProgramDiscount = interestRate - discountedRate;
+                    interestRate = discountedRate;
                 }
-                
-                const totalDiscount = originalRate - interestRate;
-                
+
+                // ใช้ส่วนลดเพิ่มเติม
+                if (additionalDiscount > 0) {
+                    interestRate = Math.max(interestRate - additionalDiscount, 0);
+                }
+
                 // คำนวณค่างวด
                 const monthlyPayment = calculateMonthlyPayment(loanAmount, interestRate, term);
                 const totalPayment = monthlyPayment * term;
                 const totalInterest = totalPayment - loanAmount;
-                
-                // แสดงผลลัพธ์
+                const totalCost = downPaymentAmount + totalPayment;
+
+                // สร้างผลลัพธ์
                 let resultHtml = `
                     <div class="result-card">
                         <h3>📋 ข้อมูลการคำนวณ</h3>
@@ -974,37 +1633,13 @@
                             <span class="result-value">${price.toLocaleString()} บาท</span>
                         </div>
                         <div class="result-row">
-                            <span class="result-label">งบดาวน์ที่มี:</span>
-                            <span class="result-value">${downPaymentAmount.toLocaleString()} บาท (${actualDownPaymentPercent.toFixed(1)}%)</span>
+                            <span class="result-label">เงินดาวน์:</span>
+                            <span class="result-value">${downPaymentAmount.toLocaleString()} บาท (${downPaymentPercent.toFixed(1)}%)</span>
                         </div>
                         <div class="result-row">
-                            <span class="result-label">เกณฑ์ขั้นต่ำที่ใช้:</span>
-                            <span class="result-value">${criteriaDownPaymentAmount.toLocaleString()} บาท (${minDownPaymentPercent}%)</span>
+                            <span class="result-label">เกณฑ์ขั้นต่ำ:</span>
+                            <span class="result-value">${minDownPaymentPercent}% (${Math.round(price * minDownPaymentPercent / 100).toLocaleString()} บาท)</span>
                         </div>
-                `;
-
-                // แสดงเงินที่ต้องเพิ่ม
-                if (additionalBudgetNeeded > 0) {
-                    resultHtml += `
-                        <div class="result-card budget-analysis budget-deficit">
-                            <h4>💳 เงินที่ต้องเพิ่ม</h4>
-                            <div class="result-row">
-                                <span class="result-label">จำนวนเงินที่ต้องเพิ่ม:</span>
-                                <span class="result-value">${additionalBudgetNeeded.toLocaleString()} บาท</span>
-                            </div>
-                            <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">เพื่อให้ถึงเกณฑ์ดาวน์ขั้นต่ำ ${minDownPaymentPercent}% (${criteriaDownPaymentAmount.toLocaleString()} บาท)</p>
-                        </div>
-                    `;
-                } else {
-                    resultHtml += `
-                        <div class="result-card budget-analysis budget-surplus">
-                            <h4>✅ งบดาวน์เพียงพอ</h4>
-                            <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">งบดาวน์ที่มีเพียงพอสำหรับเกณฑ์ขั้นต่ำ ${minDownPaymentPercent}%</p>
-                        </div>
-                    `;
-                }
-
-                resultHtml += `
                         <div class="result-row">
                             <span class="result-label">ยอดจัดไฟแนนซ์:</span>
                             <span class="result-value">${loanAmount.toLocaleString()} บาท</span>
@@ -1022,21 +1657,30 @@
                             <span class="result-value">${originalRate}% ต่อปี</span>
                         </div>
                 `;
-                
-                if (totalDiscount > 0) {
+
+                if (customerProgramDiscount > 0) {
                     resultHtml += `
                         <div class="result-row">
-                            <span class="result-label">ส่วนลดดอกเบี้ย:</span>
-                            <span class="result-value">-${totalDiscount.toFixed(2)}%</span>
+                            <span class="result-label">ส่วนลดจากโปรแกรมลูกค้า:</span>
+                            <span class="result-value">-${customerProgramDiscount.toFixed(2)}%</span>
                         </div>
+                    `;
+                }
+
+                if (additionalDiscount > 0) {
+                    resultHtml += `
+                        <div class="result-row">
+                            <span class="result-label">ส่วนลดเพิ่มเติม:</span>
+                            <span class="result-value">-${additionalDiscount.toFixed(2)}%</span>
+                        </div>
+                    `;
+                }
+
+                resultHtml += `
                         <div class="result-row">
                             <span class="result-label">อัตราดอกเบี้ยสุดท้าย:</span>
                             <span class="result-value">${interestRate.toFixed(2)}% ต่อปี</span>
                         </div>
-                    `;
-                }
-                
-                resultHtml += `
                         <div class="result-row">
                             <span class="result-label">ค่างวดต่อเดือน:</span>
                             <span class="result-value" style="font-size: 1.3rem; color: #d32f2f; font-weight: 800;">${monthlyPayment.toLocaleString()} บาท</span>
@@ -1049,16 +1693,20 @@
                             <span class="result-label">ดอกเบี้ยรวม:</span>
                             <span class="result-value">${totalInterest.toLocaleString()} บาท</span>
                         </div>
+                        <div class="result-row">
+                            <span class="result-label">เงินที่ต้องจ่ายรวม:</span>
+                            <span class="result-value">${totalCost.toLocaleString()} บาท</span>
+                        </div>
                     </div>
                 `;
 
                 // แสดงข้อมูลโปรโมชั่นที่ใช้
-                if (selectedPromotions.length > 0 || selectedCustomerPrograms.length > 0) {
+                if (selectedPromotions.length > 0) {
                     resultHtml += `<div class="result-card">
-                        <h3>🎁 โปรแกรมที่ใช้</h3>`;
+                        <h3>🎉 โปรโมชั่นที่ใช้</h3>`;
                     
-                    selectedPromotions.forEach(promo => {
-                        const promoData = ToyotaLeasingSystem.specialPromotions[promo];
+                    selectedPromotions.forEach(promotion => {
+                        const promoData = ToyotaLeasingSystem.specialPromotions[promotion];
                         if (promoData) {
                             resultHtml += `
                                 <div class="result-row">
@@ -1069,12 +1717,20 @@
                         }
                     });
                     
+                    resultHtml += `</div>`;
+                }
+
+                // แสดงข้อมูลโปรแกรมลูกค้าที่ใช้
+                if (selectedCustomerPrograms.length > 0) {
+                    resultHtml += `<div class="result-card">
+                        <h3>🎁 โปรแกรมลูกค้าที่ใช้</h3>`;
+                    
                     selectedCustomerPrograms.forEach(program => {
                         const programData = ToyotaLeasingSystem.customerPrograms[program];
                         if (programData) {
                             resultHtml += `
                                 <div class="result-row">
-                                    <span class="result-label">โปรแกรมลูกค้า:</span>
+                                    <span class="result-label">โปรแกรม:</span>
                                     <span class="result-value">${programData.description}</span>
                                 </div>
                             `;
@@ -1082,20 +1738,6 @@
                     });
                     
                     resultHtml += `</div>`;
-                }
-
-                // เปรียบเทียบกับค่างวดที่ต้องการ
-                if (targetPayment) {
-                    const paymentDifference = monthlyPayment - targetPayment;
-                    const diffClass = paymentDifference > 0 ? 'error-message' : 'success-message';
-                    const diffText = paymentDifference > 0 ? 'สูงกว่า' : 'ต่ำกว่า';
-                    
-                    resultHtml += `
-                        <div class="${diffClass}">
-                            <h4>🎯 เปรียบเทียบกับค่างวดที่ต้องการ</h4>
-                            <p>ค่างวดที่คำนวณได้ ${diffText} ที่ต้องการ ${Math.abs(paymentDifference).toLocaleString()} บาท</p>
-                        </div>
-                    `;
                 }
                 
                 resultsDiv.innerHTML = resultHtml;
@@ -1108,67 +1750,8 @@
                 `;
             }
         }
-
-        // โหลดโปรโมชั่นเมื่อเริ่มต้น
-        function loadPromotions() {
-            const promotionsDiv = document.getElementById('promotions-list');
-            let promoHtml = '';
-            
-            Object.values(ToyotaLeasingSystem.specialPromotions).forEach(promo => {
-                promoHtml += `
-                    <div class="promo-card">
-                        <div class="promo-title">${promo.description}</div>
-                        <div class="promo-details">
-                            <strong>รุ่นที่ร่วม:</strong> ${promo.models.join(', ')}<br>
-                            <strong>ระยะเวลา:</strong> ${promo.period}<br>
-                            <strong>กำหนดส่งมอบ:</strong> ${promo.deliveryDeadline}<br>
-                            <strong>เงื่อนไขพิเศษ:</strong> ${promo.conditions}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            Object.values(ToyotaLeasingSystem.customerPrograms).forEach(program => {
-                promoHtml += `
-                    <div class="promo-card">
-                        <div class="promo-title">${program.description}</div>
-                        <div class="promo-details">
-                            <strong>ส่วนลดดอกเบี้ย:</strong> ${program.interestDiscount}%<br>
-                            <strong>สิทธิพิเศษ:</strong> ${program.benefits}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            promotionsDiv.innerHTML = promoHtml;
-        }
-
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            loadPromotions();
-            
-            // ป้องกัน checkbox หลายตัวในกลุ่มเดียวกัน
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        // ถ้าเป็นโปรโมชั่น ให้ uncheck โปรโมชั่นอื่น
-                        if (['Ativ_Yaris_2566', 'Fortuner_2567', 'Veloz_Special'].includes(this.value)) {
-                            document.querySelectorAll('input[type="checkbox"]').forEach(other => {
-                                if (other !== this && ['Ativ_Yaris_2566', 'Fortuner_2567', 'Veloz_Special'].includes(other.value)) {
-                                    other.checked = false;
-                                }
-                            });
-                        }
-                    }
-                    // อัพเดทแสดงเปอร์เซ็นต์ดาวน์เมื่อเปลี่ยนโปรโมชั่น
-                    updateDownPaymentPercentage();
-                });
-            });
-
-            // Event listener สำหรับการเปลี่ยนแปลงราคารถ, รุ่นรถ, และจำนวนงวด
-            document.getElementById('carPrice').addEventListener('input', updateDownPaymentPercentage);
-            document.getElementById('loanTerm').addEventListener('change', updateDownPaymentPercentage);
-        });
     </script>
+</body>
+</html>
 </body>
 </html>
