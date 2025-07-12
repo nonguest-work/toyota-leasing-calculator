@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toyota Leasing Calculator - คำนวณโปรแกรมเช่าซื้อและสบายดี กรกฎาคม 2568</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Toyota Leasing Calculator - คำนวณโปรแกรมเช่าซื้อและสบายดี กรกฎาคม 2568</title>
+<style>
         * {
             margin: 0;
             padding: 0;
@@ -409,291 +410,315 @@
             }
         }
     </style>
-</head>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+}
+.container {
+    max-width: 480px;
+    margin: auto;
+    padding: 16px;
+    background: white;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+input, select, button {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    padding: 10px;
+    font-size: 16px;
+}
+.result-box {
+    font-size: 18px;
+    padding: 16px;
+    background-color: #e0f7fa;
+    border: 1px solid #0097a7;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+@media (max-width: 480px) {
+    h1, h2, h3 {
+        font-size: 20px;
+        text-align: center;
+    }
+    .container {
+        padding: 12px;
+    }
+}
+</style></head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🚗 Toyota Leasing Calculator</h1>
-            <p>คำนวณโปรแกรมเช่าซื้อและสบายดี กรกฎาคม 2568 <span class="new-badge">UPDATED</span></p>
-        </div>
-
-        <!-- Tab Navigation -->
-        <div class="tab-navigation">
-            <button class="tab-button active" onclick="switchTab('traditional')">
+<div class="container">
+<div class="header">
+<h1>🚗 Toyota Leasing Calculator</h1>
+<p>คำนวณโปรแกรมเช่าซื้อและสบายดี กรกฎาคม 2568 <span class="new-badge">UPDATED</span></p>
+</div>
+<!-- Tab Navigation -->
+<div class="tab-navigation">
+<button class="tab-button active" onclick="switchTab('traditional')">
                 💰 การเช่าซื้อแบบดั้งเดิม
             </button>
-            <button class="tab-button" onclick="switchTab('sabaidee')">
+<button class="tab-button" onclick="switchTab('sabaidee')">
                 ✨ โปรแกรมสบายดี
             </button>
-        </div>
-
-        <!-- Traditional Leasing Tab -->
-        <div id="traditional-tab" class="tab-content active">
-            <div class="tab-indicator">
+</div>
+<!-- Traditional Leasing Tab -->
+<div class="tab-content active" id="traditional-tab">
+<div class="tab-indicator">
                 📋 การคำนวณเช่าซื้อแบบดั้งเดิม - ผ่อนต่อเดือนเท่าๆ กัน
             </div>
-            
-            <div class="main-content">
-                <div class="form-section">
-                    <h2>📝 ข้อมูลการคำนวณ</h2>
-                    
-                    <div class="form-group">
-                        <label for="carModel">รุ่นรถ:</label>
-                        <select id="carModel" onchange="updateAvailableTerms('traditional')">
-                            <option value="">-- เลือกรุ่นรถ --</option>
-                            <option value="Ativ">Toyota Ativ</option>
-                            <option value="Yaris">Toyota Yaris</option>
-                            <option value="Yaris_Cross">Toyota Yaris Cross</option>
-                            <option value="Veloz">Toyota Veloz</option>
-                            <option value="Corolla_Cross">Toyota Corolla Cross</option>
-                            <option value="Corolla_Altis">Toyota Corolla Altis</option>
-                            <option value="Camry">Toyota Camry</option>
-                            <option value="Fortuner">Toyota Fortuner</option>
-                            <option value="Innova">Toyota Innova</option>
-                            <option value="Revo_BCab">Toyota Revo Standard (B-Cab)</option>
-                            <option value="Revo_CCab">Toyota Revo SmartCab (C-Cab)</option>
-                            <option value="Revo_DCab">Toyota Revo Doublecab (D-Cab)</option>
-                            <option value="Hilux_Champ">Toyota Hilux Champ</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="carPrice">ราคารถ (บาท):</label>
-                        <input type="number" id="carPrice" placeholder="เช่น 600000" min="50000" step="1000">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="downPayment">งบดาวน์ที่มี (บาท):</label>
-                        <input type="number" id="downPayment" placeholder="เช่น 80000" min="0" step="1000" oninput="updateDownPaymentPercentage('traditional')">
-                        <div class="percentage-display" id="downPaymentPercentage"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="loanTerm">จำนวนงวด (เดือน):</label>
-                        <select id="loanTerm">
-                            <option value="">-- เลือกจำนวนงวด --</option>
-                            <option value="48">48 เดือน (4 ปี)</option>
-                            <option value="60">60 เดือน (5 ปี)</option>
-                            <option value="72">72 เดือน (6 ปี)</option>
-                            <option value="84">84 เดือน (7 ปี)</option>
-                            <option value="96">96 เดือน (8 ปี)</option>
-                            <option value="108">108 เดือน (9 ปี)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>โปรแกรมลูกค้า:</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="customer_tlt" value="TLT_A_Grade">
-                                <label for="customer_tlt">TLT A-Grade (ส่วนลด 0.20%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="customer_kubota" value="Kubota_A_Grade">
-                                <label for="customer_kubota">Kubota A-Grade (ส่วนลด 0.20%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="customer_buy_more" value="Buy_More">
-                                <label for="customer_buy_more">Buy More (ส่วนลด 0.15%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="customer_buy_easy" value="Buy_Easy">
-                                <label for="customer_buy_easy">Buy Easy (ส่วนลด 0.15%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="customer_household" value="Household">
-                                <label for="customer_household">Household (ส่วนลด 0.15%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="customer_special" value="Special_Profession">
-                                <label for="customer_special">อาชีพพิเศษ (ส่วนลด 0.30%)</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>ตัวเลือกเสริม:</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item new-feature">
-                                <input type="checkbox" id="insurance_option" value="insurance_0.75">
-                                <label for="insurance_option">บวกดอกเบี้ย 0.75% ฟรีประกันชั้น 1 <span class="new-badge">HOT</span></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="discount-section">
-                        <div class="discount-title">💰 ส่วนลดดอกเบี้ยเพิ่มเติม</div>
-                        <div class="form-group">
-                            <label for="additionalDiscount">ส่วนลดดอกเบี้ยพิเศษ (%):</label>
-                            <div class="input-group">
-                                <input type="number" id="additionalDiscount" placeholder="เช่น 0.50" min="0" max="5" step="0.01">
-                                <span class="unit-label">%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="calculate-btn" onclick="calculateFinancing()">🧮 คำนวณ</button>
-                </div>
-
-                <div class="result-section">
-                    <h2>📊 ผลการคำนวณ</h2>
-                    <div id="results">
-                        <div class="result-card">
-                            <p style="text-align: center; color: #666; padding: 40px;">
+<div class="main-content">
+<div class="form-section">
+<h2>📝 ข้อมูลการคำนวณ</h2>
+<div class="form-group">
+<label for="carModel">รุ่นรถ:</label>
+<select id="carModel" onchange="updateAvailableTerms('traditional')">
+<option value="">-- เลือกรุ่นรถ --</option>
+<option value="Ativ">Toyota Ativ</option>
+<option value="Yaris">Toyota Yaris</option>
+<option value="Yaris_Cross">Toyota Yaris Cross</option>
+<option value="Veloz">Toyota Veloz</option>
+<option value="Corolla_Cross">Toyota Corolla Cross</option>
+<option value="Corolla_Altis">Toyota Corolla Altis</option>
+<option value="Camry">Toyota Camry</option>
+<option value="Fortuner">Toyota Fortuner</option>
+<option value="Innova">Toyota Innova</option>
+<option value="Revo_BCab">Toyota Revo Standard (B-Cab)</option>
+<option value="Revo_CCab">Toyota Revo SmartCab (C-Cab)</option>
+<option value="Revo_DCab">Toyota Revo Doublecab (D-Cab)</option>
+<option value="Hilux_Champ">Toyota Hilux Champ</option>
+</select>
+</div>
+<div class="form-group">
+<label for="carPrice">ราคารถ (บาท):</label>
+<input id="carPrice" min="50000" placeholder="เช่น 600000" step="1000" type="number"/>
+</div>
+<div class="form-group">
+<label for="downPayment">งบดาวน์ที่มี (บาท):</label>
+<input id="downPayment" min="0" oninput="updateDownPaymentPercentage('traditional')" placeholder="เช่น 80000" step="1000" type="number"/>
+<div class="percentage-display" id="downPaymentPercentage"></div>
+</div>
+<div class="form-group">
+<label for="loanTerm">จำนวนงวด (เดือน):</label>
+<select id="loanTerm">
+<option value="">-- เลือกจำนวนงวด --</option>
+<option value="48">48 เดือน (4 ปี)</option>
+<option value="60">60 เดือน (5 ปี)</option>
+<option value="72">72 เดือน (6 ปี)</option>
+<option value="84">84 เดือน (7 ปี)</option>
+<option value="96">96 เดือน (8 ปี)</option>
+<option value="108">108 เดือน (9 ปี)</option>
+</select>
+</div>
+<div class="form-group">
+<label>โปรแกรมลูกค้า:</label>
+<div class="checkbox-group">
+<div class="checkbox-item">
+<input id="customer_tlt" type="checkbox" value="TLT_A_Grade"/>
+<label for="customer_tlt">TLT A-Grade (ส่วนลด 0.20%)</label>
+</div>
+<div class="checkbox-item">
+<input id="customer_kubota" type="checkbox" value="Kubota_A_Grade"/>
+<label for="customer_kubota">Kubota A-Grade (ส่วนลด 0.20%)</label>
+</div>
+<div class="checkbox-item">
+<input id="customer_buy_more" type="checkbox" value="Buy_More"/>
+<label for="customer_buy_more">Buy More (ส่วนลด 0.15%)</label>
+</div>
+<div class="checkbox-item">
+<input id="customer_buy_easy" type="checkbox" value="Buy_Easy"/>
+<label for="customer_buy_easy">Buy Easy (ส่วนลด 0.15%)</label>
+</div>
+<div class="checkbox-item">
+<input id="customer_household" type="checkbox" value="Household"/>
+<label for="customer_household">Household (ส่วนลด 0.15%)</label>
+</div>
+<div class="checkbox-item">
+<input id="customer_special" type="checkbox" value="Special_Profession"/>
+<label for="customer_special">อาชีพพิเศษ (ส่วนลด 0.30%)</label>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label>ตัวเลือกเสริม:</label>
+<div class="checkbox-group">
+<div class="checkbox-item new-feature">
+<input id="insurance_option" type="checkbox" value="insurance_0.75"/>
+<label for="insurance_option">บวกดอกเบี้ย 0.75% ฟรีประกันชั้น 1 <span class="new-badge">HOT</span></label>
+</div>
+</div>
+</div>
+<div class="discount-section">
+<div class="discount-title">💰 ส่วนลดดอกเบี้ยเพิ่มเติม</div>
+<div class="form-group">
+<label for="additionalDiscount">ส่วนลดดอกเบี้ยพิเศษ (%):</label>
+<div class="input-group">
+<input id="additionalDiscount" max="5" min="0" placeholder="เช่น 0.50" step="0.01" type="number"/>
+<span class="unit-label">%</span>
+</div>
+</div>
+</div>
+<button class="calculate-btn" onclick="calculateFinancing()">🧮 คำนวณ</button>
+</div>
+<div class="result-section">
+<h2>📊 ผลการคำนวณ</h2>
+<div id="results">
+<div class="result-card">
+<p style="text-align: center; color: #666; padding: 40px;">
                                 🔍 กรุณากรอกข้อมูลและกดคำนวณเพื่อดูผลลัพธ์
                             </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sabaidee Tab -->
-        <div id="sabaidee-tab" class="tab-content">
-            <div class="tab-indicator">
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sabaidee Tab -->
+<div class="tab-content" id="sabaidee-tab">
+<div class="tab-indicator">
                 ✨ โปรแกรมสบายดี - ค่างวดต่ำ มีมูลค่าคงเหลือ (RV) ที่ท้ายสัญญา
             </div>
-            
-            <div class="main-content">
-                <div class="form-section">
-                    <h2>📝 ข้อมูลการคำนวณสบายดี</h2>
-                    
-                    <div class="form-group">
-                        <label for="sabaideeCarModel">รุ่นรถ:</label>
-                        <select id="sabaideeCarModel" onchange="updateSabaideeOptions()">
-                            <option value="">-- เลือกรุ่นรถ --</option>
-                            <option value="Ativ">Toyota Ativ</option>
-                            <option value="Yaris">Toyota Yaris</option>
-                            <option value="Yaris_Cross">Toyota Yaris Cross</option>
-                            <option value="Veloz">Toyota Veloz</option>
-                            <option value="Corolla_Cross">Toyota Corolla Cross</option>
-                            <option value="Corolla_Altis">Toyota Corolla Altis</option>
-                            <option value="Fortuner">Toyota Fortuner</option>
-                            <option value="Innova">Toyota Innova</option>
-                            <option value="Revo_BCab">Toyota Revo Standard (B-Cab)</option>
-                            <option value="Revo_CCab">Toyota Revo SmartCab (C-Cab)</option>
-                            <option value="Revo_DCab">Toyota Revo Doublecab (D-Cab)</option>
-                            <option value="Hilux_Champ">Toyota Hilux Champ</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sabaideeCarPrice">ราคารถ (บาท):</label>
-                        <input type="number" id="sabaideeCarPrice" placeholder="เช่น 600000" min="50000" step="1000">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sabaideeDownPayment">งบดาวน์ที่มี (บาท):</label>
-                        <input type="number" id="sabaideeDownPayment" placeholder="เช่น 80000" min="0" step="1000" oninput="updateDownPaymentPercentage('sabaidee')">
-                        <div class="percentage-display" id="sabaideeDownPaymentPercentage"></div>
-                    </div>
-
-                    <div class="sabaidee-options">
-                        <div class="sabaidee-title">✨ ตัวเลือกโปรแกรมสบายดี</div>
-                        <div class="form-group">
-                            <label for="sabaideeProgram">โปรแกรม:</label>
-                            <select id="sabaideeProgram" onchange="updateSabaideeTerms()">
-                                <option value="">-- เลือกโปรแกรม --</option>
-                                <option value="standard">สบายดีมาตรฐาน</option>
-                                <option value="revolution">สบายดีรีโวลูชั่น</option>
-                                <option value="stair_step">สบายดี Stair Step</option>
-                                <option value="seven_years">สบายดี 7 ปี</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="sabaideeTerm">ระยะเวลา:</label>
-                            <select id="sabaideeTerm" onchange="updateRVDisplay()">
-                                <option value="">-- เลือกระยะเวลา --</option>
-                            </select>
-                        </div>
-
-                        <div id="rvDisplay" class="rv-display" style="display: none;">
-                            <div class="result-row">
-                                <span class="result-label">มูลค่าคงเหลือ (RV):</span>
-                                <span class="rv-value" id="rvPercentage">-</span>
-                            </div>
-                            <div class="result-row">
-                                <span class="result-label">จำนวนเงิน RV:</span>
-                                <span class="rv-value" id="rvAmount">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>โปรแกรมลูกค้า (สบายดี):</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="sabaidee_customer_tlt" value="TLT_A_Grade">
-                                <label for="sabaidee_customer_tlt">TLT A-Grade (ส่วนลด 0.20%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="sabaidee_customer_kubota" value="Kubota_A_Grade">
-                                <label for="sabaidee_customer_kubota">Kubota A-Grade (ส่วนลด 0.20%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="sabaidee_customer_buy_more" value="Buy_More">
-                                <label for="sabaidee_customer_buy_more">Buy More (ส่วนลด 0.15%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="sabaidee_customer_buy_easy" value="Buy_Easy">
-                                <label for="sabaidee_customer_buy_easy">Buy Easy (ส่วนลด 0.15%)</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="sabaidee_customer_special" value="Special_Profession">
-                                <label for="sabaidee_customer_special">อาชีพพิเศษ (ส่วนลด 0.30%)</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="calculate-btn" onclick="calculateSabaidee()">✨ คำนวณสบายดี</button>
-                </div>
-
-                <div class="result-section">
-                    <h2>📊 ผลการคำนวณสบายดี</h2>
-                    <div id="sabaideeResults">
-                        <div class="result-card">
-                            <p style="text-align: center; color: #666; padding: 40px;">
+<div class="main-content">
+<div class="form-section">
+<h2>📝 ข้อมูลการคำนวณสบายดี</h2>
+<div class="form-group">
+<label for="sabaideeCarModel">รุ่นรถ:</label>
+<select id="sabaideeCarModel" onchange="updateSabaideeOptions()">
+<option value="">-- เลือกรุ่นรถ --</option>
+<option value="Ativ">Toyota Ativ</option>
+<option value="Yaris">Toyota Yaris</option>
+<option value="Yaris_Cross">Toyota Yaris Cross</option>
+<option value="Veloz">Toyota Veloz</option>
+<option value="Corolla_Cross">Toyota Corolla Cross</option>
+<option value="Corolla_Altis">Toyota Corolla Altis</option>
+<option value="Fortuner">Toyota Fortuner</option>
+<option value="Innova">Toyota Innova</option>
+<option value="Revo_BCab">Toyota Revo Standard (B-Cab)</option>
+<option value="Revo_CCab">Toyota Revo SmartCab (C-Cab)</option>
+<option value="Revo_DCab">Toyota Revo Doublecab (D-Cab)</option>
+<option value="Hilux_Champ">Toyota Hilux Champ</option>
+</select>
+</div>
+<div class="form-group">
+<label for="sabaideeCarPrice">ราคารถ (บาท):</label>
+<input id="sabaideeCarPrice" min="50000" placeholder="เช่น 600000" step="1000" type="number"/>
+</div>
+<div class="form-group">
+<label for="sabaideeDownPayment">งบดาวน์ที่มี (บาท):</label>
+<input id="sabaideeDownPayment" min="0" oninput="updateDownPaymentPercentage('sabaidee')" placeholder="เช่น 80000" step="1000" type="number"/>
+<div class="percentage-display" id="sabaideeDownPaymentPercentage"></div>
+</div>
+<div class="sabaidee-options">
+<div class="sabaidee-title">✨ ตัวเลือกโปรแกรมสบายดี</div>
+<div class="form-group">
+<label for="sabaideeProgram">โปรแกรม:</label>
+<select id="sabaideeProgram" onchange="updateSabaideeTerms()">
+<option value="">-- เลือกโปรแกรม --</option>
+<option value="standard">สบายดีมาตรฐาน</option>
+<option value="revolution">สบายดีรีโวลูชั่น</option>
+<option value="stair_step">สบายดี Stair Step</option>
+<option value="seven_years">สบายดี 7 ปี</option>
+</select>
+</div>
+<div class="form-group">
+<label for="sabaideeTerm">ระยะเวลา:</label>
+<select id="sabaideeTerm" onchange="updateRVDisplay()">
+<option value="">-- เลือกระยะเวลา --</option>
+</select>
+</div>
+<div class="rv-display" id="rvDisplay" style="display: none;">
+<div class="result-row">
+<span class="result-label">มูลค่าคงเหลือ (RV):</span>
+<span class="rv-value" id="rvPercentage">-</span>
+</div>
+<div class="result-row">
+<span class="result-label">จำนวนเงิน RV:</span>
+<span class="rv-value" id="rvAmount">-</span>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label>โปรแกรมลูกค้า (สบายดี):</label>
+<div class="checkbox-group">
+<div class="checkbox-item">
+<input id="sabaidee_customer_tlt" type="checkbox" value="TLT_A_Grade"/>
+<label for="sabaidee_customer_tlt">TLT A-Grade (ส่วนลด 0.20%)</label>
+</div>
+<div class="checkbox-item">
+<input id="sabaidee_customer_kubota" type="checkbox" value="Kubota_A_Grade"/>
+<label for="sabaidee_customer_kubota">Kubota A-Grade (ส่วนลด 0.20%)</label>
+</div>
+<div class="checkbox-item">
+<input id="sabaidee_customer_buy_more" type="checkbox" value="Buy_More"/>
+<label for="sabaidee_customer_buy_more">Buy More (ส่วนลด 0.15%)</label>
+</div>
+<div class="checkbox-item">
+<input id="sabaidee_customer_buy_easy" type="checkbox" value="Buy_Easy"/>
+<label for="sabaidee_customer_buy_easy">Buy Easy (ส่วนลด 0.15%)</label>
+</div>
+<div class="checkbox-item">
+<input id="sabaidee_customer_special" type="checkbox" value="Special_Profession"/>
+<label for="sabaidee_customer_special">อาชีพพิเศษ (ส่วนลด 0.30%)</label>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label>ตัวเลือกเสริม:</label>
+<div class="checkbox-group">
+<div class="checkbox-item new-feature">
+<input id="sabaidee_insurance_option" type="checkbox" value="insurance_0.75"/>
+<label for="sabaidee_insurance_option">บวกดอกเบี้ย 0.75% ฟรีประกันชั้น 1 <span class="new-badge">HOT</span></label>
+</div>
+</div>
+</div>
+<button class="calculate-btn" onclick="calculateSabaidee()">✨ คำนวณสบายดี</button>
+</div>
+<div class="result-section">
+<h2>📊 ผลการคำนวณสบายดี</h2>
+<div id="sabaideeResults">
+<div class="result-card">
+<p style="text-align: center; color: #666; padding: 40px;">
                                 🔍 กรุณากรอกข้อมูลและกดคำนวณเพื่อดูผลลัพธ์
                             </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="promotions-section">
-            <h2>🎉 โปรโมชั่นและแคมเปญพิเศษ กรกฎาคม 2568</h2>
-            <div id="promotions-list">
-                <div class="promo-card new">
-                    <div class="promo-title">🚗 แคมเปญดอกเบี้ยพิเศษ Ativ/Yaris 2566</div>
-                    <div class="promo-details">อัตราดอกเบี้ยต่ำสุด 0% ที่ดาวน์ 25% ระยะเวลา 48 เดือน (1-31 ก.ค. 2568)</div>
-                </div>
-                <div class="promo-card new">
-                    <div class="promo-title">🏔️ แคมเปญดอกเบี้ยพิเศษ Fortuner 2567</div>
-                    <div class="promo-details">อัตราดอกเบี้ยต่ำสุด 0.89% ที่ดาวน์ 25% ระยะเวลา 48 เดือน (1-31 ก.ค. 2568)</div>
-                </div>
-                <div class="promo-card">
-                    <div class="promo-title">⭐ แคมเปญดอกเบี้ยพิเศษ Veloz</div>
-                    <div class="promo-details">อัตราดอกเบี้ยต่ำสุด 0% ที่ดาวน์ 25% ระยะเวลา 60 เดือน (1 มี.ค. - 31 ก.ค. 2568)</div>
-                </div>
-                <div class="promo-card new">
-                    <div class="promo-title">🎯 แคมเปญค่าตอบแทนพิเศษสัญญาสบายดี</div>
-                    <div class="promo-details">ค่าตอบแทนพิเศษ 500-1,000 บาท/สัญญา สำหรับสัญญาสบายดี (1-31 ก.ค. 2568)</div>
-                </div>
-                <div class="promo-card">
-                    <div class="promo-title">🛡️ แคมเปญประกันภัย Toyota Care</div>
-                    <div class="promo-details">รางวัลพิเศษ 500-1,000 บาท สำหรับประกันภัยประเภท 1 (1-31 ก.ค. 2568)</div>
-                </div>
-                <div class="promo-card">
-                    <div class="promo-title">🌿 ส่วนลดรถไฮบริด</div>
-                    <div class="promo-details">ส่วนลดดอกเบี้ย 0.10% สำหรับรถไฮบริดทุกรุ่น (ตลอดปี 2568)</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="promotions-section">
+<h2>🎉 โปรโมชั่นและแคมเปญพิเศษ กรกฎาคม 2568</h2>
+<div id="promotions-list">
+<div class="promo-card new">
+<div class="promo-title">🛡️ ตัวเลือกประกันชั้น 1</div>
+<div class="promo-details">บวกดอกเบี้ย 0.75% ฟรีประกันชั้น 1 ครบครัน ซ่อมศูนย์ ไม่ต้องจ่ายค่าประกันล่วงหน้า</div>
+</div>
+<div class="promo-card new">
+<div class="promo-title">🎯 แคมเปญค่าตอบแทนพิเศษสัญญาสบายดี</div>
+<div class="promo-details">ค่าตอบแทนพิเศษ 500-1,000 บาท/สัญญา สำหรับสัญญาสบายดี (1-31 ก.ค. 2568)</div>
+</div>
+<div class="promo-card">
+<div class="promo-title">🛡️ แคมเปญประกันภัย Toyota Care</div>
+<div class="promo-details">รางวัลพิเศษ 500-1,000 บาท สำหรับประกันภัยประเภท 1 (1-31 ก.ค. 2568)</div>
+</div>
+<div class="promo-card">
+<div class="promo-title">🌿 ส่วนลดรถไฮบริด</div>
+<div class="promo-details">ส่วนลดดอกเบี้ย 0.10% สำหรับรถไฮบริดทุกรุ่น (ตลอดปี 2568)</div>
+</div>
+<div class="promo-card">
+<div class="promo-title">🏆 โปรแกรม RO Scheme</div>
+<div class="promo-details">ส่วนลดดอกเบี้ย 0.50-0.70% สำหรับรุ่นที่ร่วมโปรแกรม (1-31 ก.ค. 2568)</div>
+</div>
+<div class="promo-card">
+<div class="promo-title">💎 ส่วนลดลูกค้าเก่าโตโยต้า (Loyalty)</div>
+<div class="promo-details">ส่วนลดดอกเบี้ย 0.15% สำหรับลูกค้าเก่าโตโยต้า (8 ก.พ. 2567 - 31 ก.ค. 2568)</div>
+</div>
+</div>
+</div>
+</div>
+<script>
         // ฟังก์ชันสลับแท็บ
         function switchTab(tabName) {
             // ซ่อนแท็บทั้งหมด
@@ -1004,12 +1029,12 @@
         };
 
         // ฟังก์ชันหาเปอร์เซ็นต์ดาวน์ขั้นต่ำที่เป็นไปได้และมีอัตราดอกเบี้ย
-        function findMinimumDownPaymentPercent(actualPercent, model, term, promotion = null) {
+        function findMinimumDownPaymentPercent(actualPercent, model, term) {
             const availablePercents = [5, 10, 15, 20, 25];
             
             for (let percent of availablePercents) {
                 if (percent >= actualPercent) {
-                    const rate = getInterestRate(model, percent, term, promotion);
+                    const rate = getInterestRate(model, percent, term);
                     if (rate !== null) {
                         return percent;
                     }
@@ -1017,7 +1042,7 @@
             }
             
             for (let percent of availablePercents) {
-                const rate = getInterestRate(model, percent, term, promotion);
+                const rate = getInterestRate(model, percent, term);
                 if (rate !== null) {
                     return percent;
                 }
@@ -1052,16 +1077,7 @@
                     updateRVDisplay();
                 } else if (model && term) {
                     // แบบเดิมสำหรับการเช่าซื้อปกติ
-                    const selectedPromotions = [];
-                    document.querySelectorAll('#traditional-tab input[type="checkbox"]:checked').forEach(checkbox => {
-                        if (!checkbox.value.includes('_Grade') && !checkbox.value.includes('_More') && 
-                            !checkbox.value.includes('_Easy') && checkbox.value !== 'Household' && 
-                            checkbox.value !== 'Special_Profession') {
-                            selectedPromotions.push(checkbox.value);
-                        }
-                    });
-                    
-                    const minPercent = findMinimumDownPaymentPercent(parseFloat(actualPercent), model, term, selectedPromotions[0]);
+                    const minPercent = findMinimumDownPaymentPercent(parseFloat(actualPercent), model, term);
                     
                     if (minPercent === null) {
                         percentageDiv.textContent = `คิดเป็น ${actualPercent}% | ไม่พบอัตราดอกเบี้ยสำหรับ ${model} งวด ${term} เดือน`;
@@ -1231,16 +1247,9 @@
         }
 
         // ฟังก์ชันหาอัตราดอกเบี้ย
-        function getInterestRate(model, downPayment, term, promotion = null) {
+        function getInterestRate(model, downPayment, term) {
             const key = downPayment + "%";
             const termStr = term.toString();
-            
-            if (promotion && ToyotaLeasingSystem.specialPromotions[promotion]) {
-                const promo = ToyotaLeasingSystem.specialPromotions[promotion];
-                if (promo.models.includes(model)) {
-                    return promo.rates[key]?.[termStr] || null;
-                }
-            }
             
             return ToyotaLeasingSystem.standardRates[model]?.[key]?.[termStr] || null;
         }
@@ -1334,20 +1343,33 @@
                     return;
                 }
 
-                // รวบรวมโปรแกรมลูกค้าที่เลือก
+                // รวบรวมโปรแกรมลูกค้าและตัวเลือกเสริมที่เลือก
                 const selectedCustomerPrograms = [];
+                let hasInsuranceOption = false;
+                
                 document.querySelectorAll('#sabaidee-tab input[type="checkbox"]:checked').forEach(checkbox => {
-                    selectedCustomerPrograms.push(checkbox.value);
+                    if (checkbox.value === 'insurance_0.75') {
+                        hasInsuranceOption = true;
+                    } else {
+                        selectedCustomerPrograms.push(checkbox.value);
+                    }
                 });
 
                 const originalRate = interestRate;
                 let customerProgramDiscount = 0;
+                let insuranceIncrease = 0;
                 
                 // ใช้ส่วนลดจากโปรแกรมลูกค้า
                 if (selectedCustomerPrograms.length > 0) {
                     const discountedRate = applyCustomerDiscount(interestRate, selectedCustomerPrograms);
                     customerProgramDiscount = interestRate - discountedRate;
                     interestRate = discountedRate;
+                }
+
+                // เพิ่มดอกเบี้ยสำหรับประกัน
+                if (hasInsuranceOption) {
+                    insuranceIncrease = 0.75;
+                    interestRate += insuranceIncrease;
                 }
 
                 // คำนวณค่างวด
@@ -1429,14 +1451,23 @@
                             <span class="result-label">ส่วนลดจากโปรแกรมลูกค้า:</span>
                             <span class="result-value">-${customerProgramDiscount.toFixed(2)}%</span>
                         </div>
+                    `;
+                }
+
+                if (hasInsuranceOption) {
+                    resultHtml += `
                         <div class="result-row">
-                            <span class="result-label">อัตราดอกเบี้ยสุดท้าย:</span>
-                            <span class="result-value">${interestRate.toFixed(2)}% ต่อปี</span>
+                            <span class="result-label">บวกดอกเบี้ยสำหรับประกัน:</span>
+                            <span class="result-value">+${insuranceIncrease.toFixed(2)}%</span>
                         </div>
                     `;
                 }
                 
                 resultHtml += `
+                        <div class="result-row">
+                            <span class="result-label">อัตราดอกเบี้ยสุดท้าย:</span>
+                            <span class="result-value">${interestRate.toFixed(2)}% ต่อปี</span>
+                        </div>
                         <div class="result-row">
                             <span class="result-label">ค่างวดต่อเดือน:</span>
                             <span class="result-value" style="font-size: 1.3rem; color: #d32f2f; font-weight: 800;">${monthlyPayment.toLocaleString()} บาท</span>
@@ -1456,7 +1487,24 @@
                     </div>
 
                     ${stairStepHtml}
+                `;
 
+                // แสดงประโยชน์ของประกัน
+                if (hasInsuranceOption) {
+                    resultHtml += `
+                        <div class="result-card budget-surplus">
+                            <h4>🛡️ ประโยชน์ประกันชั้น 1</h4>
+                            <ul style="margin-left: 20px; color: #555; line-height: 1.6;">
+                                <li>ความคุ้มครองเต็มมูลค่า สำหรับรถยนต์และบุคคลที่สาม</li>
+                                <li>ซ่อมศูนย์หรือยี่ห้อเดียวกัน</li>
+                                <li>รถเสียซ่อมไม่ได้ จ่ายตามราคาประเมิน</li>
+                                <li>ไม่ต้องจ่ายเงินค่าประกันล่วงหน้า</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                resultHtml += `
                     <div class="result-card budget-analysis">
                         <h4>💡 ข้อมูลสำคัญ</h4>
                         <p style="margin-bottom: 10px;"><strong>มูลค่าคงเหลือ (RV):</strong> ${rvAmount.toLocaleString()} บาท</p>
@@ -1539,17 +1587,15 @@
                 return;
             }
 
-            // รวบรวมโปรโมชั่นและโปรแกรมลูกค้าที่เลือก
-            const selectedPromotions = [];
+            // รวบรวมโปรแกรมลูกค้าและตัวเลือกเสริมที่เลือก
             const selectedCustomerPrograms = [];
+            let hasInsuranceOption = false;
             
             document.querySelectorAll('#traditional-tab input[type="checkbox"]:checked').forEach(checkbox => {
-                if (checkbox.value.includes('_Grade') || checkbox.value.includes('_More') || 
-                    checkbox.value.includes('_Easy') || checkbox.value === 'Household' || 
-                    checkbox.value === 'Special_Profession') {
-                    selectedCustomerPrograms.push(checkbox.value);
+                if (checkbox.value === 'insurance_0.75') {
+                    hasInsuranceOption = true;
                 } else {
-                    selectedPromotions.push(checkbox.value);
+                    selectedCustomerPrograms.push(checkbox.value);
                 }
             });
 
@@ -1559,7 +1605,7 @@
                 
                 // หาเปอร์เซ็นต์ดาวน์ขั้นต่ำที่เป็นไปได้
                 const minDownPaymentPercent = findMinimumDownPaymentPercent(
-                    downPaymentPercent, model, term, selectedPromotions[0]
+                    downPaymentPercent, model, term
                 );
                 
                 if (minDownPaymentPercent === null) {
@@ -1572,7 +1618,7 @@
                 }
 
                 // หาอัตราดอกเบี้ย
-                let interestRate = getInterestRate(model, minDownPaymentPercent, term, selectedPromotions[0]);
+                let interestRate = getInterestRate(model, minDownPaymentPercent, term);
                 
                 if (interestRate === null) {
                     resultsDiv.innerHTML = `
@@ -1585,12 +1631,19 @@
 
                 const originalRate = interestRate;
                 let customerProgramDiscount = 0;
+                let insuranceIncrease = 0;
                 
                 // ใช้ส่วนลดจากโปรแกรมลูกค้า
                 if (selectedCustomerPrograms.length > 0) {
                     const discountedRate = applyCustomerDiscount(interestRate, selectedCustomerPrograms);
                     customerProgramDiscount = interestRate - discountedRate;
                     interestRate = discountedRate;
+                }
+
+                // เพิ่มดอกเบี้ยสำหรับประกัน
+                if (hasInsuranceOption) {
+                    insuranceIncrease = 0.75;
+                    interestRate += insuranceIncrease;
                 }
 
                 // ใช้ส่วนลดเพิ่มเติม
@@ -1651,6 +1704,15 @@
                     `;
                 }
 
+                if (hasInsuranceOption) {
+                    resultHtml += `
+                        <div class="result-row">
+                            <span class="result-label">บวกดอกเบี้ยสำหรับประกัน:</span>
+                            <span class="result-value">+${insuranceIncrease.toFixed(2)}%</span>
+                        </div>
+                    `;
+                }
+
                 if (additionalDiscount > 0) {
                     resultHtml += `
                         <div class="result-row">
@@ -1684,24 +1746,19 @@
                     </div>
                 `;
 
-                // แสดงข้อมูลโปรโมชั่นที่ใช้
-                if (selectedPromotions.length > 0) {
-                    resultHtml += `<div class="result-card">
-                        <h3>🎉 โปรโมชั่นที่ใช้</h3>`;
-                    
-                    selectedPromotions.forEach(promotion => {
-                        const promoData = ToyotaLeasingSystem.specialPromotions[promotion];
-                        if (promoData) {
-                            resultHtml += `
-                                <div class="result-row">
-                                    <span class="result-label">โปรโมชั่น:</span>
-                                    <span class="result-value">${promoData.description}</span>
-                                </div>
-                            `;
-                        }
-                    });
-                    
-                    resultHtml += `</div>`;
+                // แสดงประโยชน์ของประกัน
+                if (hasInsuranceOption) {
+                    resultHtml += `
+                        <div class="result-card budget-surplus">
+                            <h4>🛡️ ประโยชน์ประกันชั้น 1</h4>
+                            <ul style="margin-left: 20px; color: #555; line-height: 1.6;">
+                                <li>ความคุ้มครองเต็มมูลค่า สำหรับรถยนต์และบุคคลที่สาม</li>
+                                <li>ซ่อมศูนย์หรือยี่ห้อเดียวกัน</li>
+                                <li>รถเสียซ่อมไม่ได้ จ่ายตามราคาประเมิน</li>
+                                <li>ไม่ต้องจ่ายเงินค่าประกันล่วงหน้า</li>
+                            </ul>
+                        </div>
+                    `;
                 }
 
                 // แสดงข้อมูลโปรแกรมลูกค้าที่ใช้
@@ -1736,4 +1793,4 @@
         }
     </script>
 </body>
-</html>
+</html> 
